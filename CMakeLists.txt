@@ -10,6 +10,7 @@ add_executable(SheepFight
         src/Manual.h
 )
 
+
 target_link_libraries(SheepFight
         sfml-graphics
         sfml-window
