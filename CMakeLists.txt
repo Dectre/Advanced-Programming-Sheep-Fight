@@ -8,6 +8,16 @@ add_executable(SheepFight
         src/Game.cpp
         src/Game.h
         src/Manual.h
+        src/Player.cpp
+        src/Player.h
+        src/Queue.cpp
+        src/Queue.h
+        src/Line.cpp
+        src/Line.h
+        src/Score.cpp
+        src/Score.h
+        src/Animal.cpp
+        src/Animal.h
 )
 
 
