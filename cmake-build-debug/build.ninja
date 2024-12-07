@@ -61,6 +61,36 @@ build CMakeFiles/SheepFight.dir/src/Game.cpp.o: CXX_COMPILER__SheepFight_unscann
   OBJECT_DIR = CMakeFiles/SheepFight.dir
   OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
 
+build CMakeFiles/SheepFight.dir/src/Player.cpp.o: CXX_COMPILER__SheepFight_unscanned_Debug /media/dectre/New$ Volume/codes/C++/AP/SheepFight/src/Player.cpp || cmake_object_order_depends_target_SheepFight
+  DEP_FILE = CMakeFiles/SheepFight.dir/src/Player.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SheepFight.dir
+  OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
+
+build CMakeFiles/SheepFight.dir/src/Queue.cpp.o: CXX_COMPILER__SheepFight_unscanned_Debug /media/dectre/New$ Volume/codes/C++/AP/SheepFight/src/Queue.cpp || cmake_object_order_depends_target_SheepFight
+  DEP_FILE = CMakeFiles/SheepFight.dir/src/Queue.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SheepFight.dir
+  OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
+
+build CMakeFiles/SheepFight.dir/src/Line.cpp.o: CXX_COMPILER__SheepFight_unscanned_Debug /media/dectre/New$ Volume/codes/C++/AP/SheepFight/src/Line.cpp || cmake_object_order_depends_target_SheepFight
+  DEP_FILE = CMakeFiles/SheepFight.dir/src/Line.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SheepFight.dir
+  OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
+
+build CMakeFiles/SheepFight.dir/src/Score.cpp.o: CXX_COMPILER__SheepFight_unscanned_Debug /media/dectre/New$ Volume/codes/C++/AP/SheepFight/src/Score.cpp || cmake_object_order_depends_target_SheepFight
+  DEP_FILE = CMakeFiles/SheepFight.dir/src/Score.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SheepFight.dir
+  OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
+
+build CMakeFiles/SheepFight.dir/src/Animal.cpp.o: CXX_COMPILER__SheepFight_unscanned_Debug /media/dectre/New$ Volume/codes/C++/AP/SheepFight/src/Animal.cpp || cmake_object_order_depends_target_SheepFight
+  DEP_FILE = CMakeFiles/SheepFight.dir/src/Animal.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SheepFight.dir
+  OBJECT_FILE_DIR = CMakeFiles/SheepFight.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SheepFight
@@ -69,7 +99,7 @@ build CMakeFiles/SheepFight.dir/src/Game.cpp.o: CXX_COMPILER__SheepFight_unscann
 #############################################
 # Link the executable SheepFight
 
-build SheepFight: CXX_EXECUTABLE_LINKER__SheepFight_Debug CMakeFiles/SheepFight.dir/src/main.cpp.o CMakeFiles/SheepFight.dir/src/Game.cpp.o
+build SheepFight: CXX_EXECUTABLE_LINKER__SheepFight_Debug CMakeFiles/SheepFight.dir/src/main.cpp.o CMakeFiles/SheepFight.dir/src/Game.cpp.o CMakeFiles/SheepFight.dir/src/Player.cpp.o CMakeFiles/SheepFight.dir/src/Queue.cpp.o CMakeFiles/SheepFight.dir/src/Line.cpp.o CMakeFiles/SheepFight.dir/src/Score.cpp.o CMakeFiles/SheepFight.dir/src/Animal.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lsfml-graphics  -lsfml-window  -lsfml-system
   OBJECT_DIR = CMakeFiles/SheepFight.dir

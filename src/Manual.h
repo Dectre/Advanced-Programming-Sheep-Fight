@@ -15,6 +15,7 @@ const int windowHeight = 720;
 
 
 const string BACKGROUND = "sprites/background/background.png";
+const vector<string> SHEEP = {"sprites/background/background.png"}
 
 #endif //SHEEPFIGHT_MANUAL_H
 
