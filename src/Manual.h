@@ -18,8 +18,8 @@ const int windowHeight = 720;
 enum Direction {LEFT = -1 , RIGHT = 1};
 
 Path BACKGROUND = "sprites/background/background.png";
-Path WHITE_PIG_MOVE = {"sprites/white_pig/move.png"};
-Path WHITE_PIG_STAND = {"sprites/white_pig/stand.png"};
+Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
+Path WHITE_PIG_STAND = "sprites/white-pig/stand.png";
 
 const int pigDamage = 2;
 const int goatDamage = 5;
@@ -33,6 +33,7 @@ const int sheepPower = 15;
 const int pigDisplayProbability = 5;
 const int goatDisplayProbability = 3;
 const int sheepDisplayProbability = 2;
+const int numOfLines = 4;
 
 
 #endif //SHEEPFIGHT_MANUAL_H

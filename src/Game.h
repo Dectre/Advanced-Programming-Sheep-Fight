@@ -3,6 +3,7 @@
 
 #include "Health.h"
 #include "Player.h"
+#include "Line.h"
 
 
 class Game {
@@ -16,9 +17,12 @@ private:
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
 
+    vector<Line*> lines;
+
     void initWindow();
     void initBackgroundTexture();
     void initBackgroundSprite();
+    void initLines();
     void initHealthBars();
 
     void updatePollEvents();

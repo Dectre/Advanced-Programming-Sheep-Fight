@@ -27,6 +27,7 @@ void Game::updatePollEvents() {
 }
 
 void Game::run() {
+    this->lines[0]->addAnimalToTeam1(new WhitePig() );
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->render();
@@ -36,17 +37,21 @@ void Game::run() {
 void Game::render() {
     this->window->clear();
     this->window->draw(this->backgroundSprite);
-    this->animal
+    for (Line* line: lines) {
+        line->render(*this->window);
+    }
     this->window->display();
 }
 
 Game::Game() {
-
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
-
+    for (int i = 0; i < numOfLines; ++i) {
+        this->lines.push_back(new Line());
+    }
 }
+
 
 Game::~Game() {
     delete this->window;

@@ -4,12 +4,17 @@ void Animal::move() {
     this->sprite.move(this->speed * this->direction,0);
 }
 
-void Animal::render(sf::RenderTarget &target) {
+void Animal::render(sf::RenderTarget& target) {
+    this->setPosition(200,200);
     target.draw(this->sprite);
 }
 
 void Animal::setScale(const float xScale, const float yScale) {
     this->sprite.setScale(xScale,yScale);
+}
+
+void Animal::setPosition(const float x, const float y) {
+    this->sprite.setPosition(x, y);
 }
 
 void Animal::initSprite() {
@@ -18,8 +23,8 @@ void Animal::initSprite() {
 
 WhitePig::WhitePig() : Animal() {
     this->initVariables();
-    this->initSprite();
     this->initTexture();
+    this->initSprite();
 }
 
 void WhitePig::initVariables() {
