@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Queue.h"
 
+#include "Line.h"
+
 
 class Game {
 private:
@@ -19,9 +21,12 @@ private:
     Queue* leftPlayerQueue;  // Queue for Player 1
     Queue* rightPlayerQueue; // Queue for Player 2
 
+    vector<Line*> lines;
+
     void initWindow();
     void initBackgroundTexture();
     void initBackgroundSprite();
+    void initLines();
     void initHealthBars();
     void initQueues();
     void updatePollEvents();

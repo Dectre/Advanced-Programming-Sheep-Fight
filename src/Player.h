@@ -3,7 +3,6 @@
 
 
 class Player {
-
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

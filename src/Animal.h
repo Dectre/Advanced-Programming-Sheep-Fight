@@ -13,8 +13,8 @@ public:
     void move();
     void setScale(const float xScale, const float yScale);
     void initSprite();
-    void render(sf::RenderTarget &target);
-    void setPosition();
+    void render(sf::RenderTarget& target);
+    void setPosition(const float x, const float y);
     void animalIsFighting() { this-> isFighting = true; }
 protected:
     sf::Sprite sprite;
