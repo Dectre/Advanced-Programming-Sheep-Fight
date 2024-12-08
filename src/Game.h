@@ -3,6 +3,8 @@
 
 #include "Health.h"
 #include "Player.h"
+#include "Queue.h"
+
 
 class Game {
 private:
@@ -14,13 +16,16 @@ private:
 
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
+    Queue* leftPlayerQueue;  // Queue for Player 1
+    Queue* rightPlayerQueue; // Queue for Player 2
 
     void initWindow();
     void initBackgroundTexture();
     void initBackgroundSprite();
     void initHealthBars();
-
+    void initQueues();
     void updatePollEvents();
+    void updateQueues();
     void updateHealthBars();
 
 public:
@@ -32,3 +37,7 @@ public:
 };
 
 #endif //SHEEPFIGHT_GAME_H
+
+#include "Queue.h"
+
+

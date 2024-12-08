@@ -18,6 +18,13 @@ void Game::initBackgroundSprite() {
     float backgroundSizeY = backgroundTexture.getSize().y;
     this->backgroundSprite.setScale(windowWidth / backgroundSizeX, windowHeight/ backgroundSizeY);
 }
+
+void Game::initQueues() {
+    this->leftPlayerQueue = new Queue(sf::Vector2f(50.f, 50.f), 80.f);
+    this->rightPlayerQueue = new Queue(sf::Vector2f(900.f, 50.f), 80.f);
+}
+
+
 void Game::updatePollEvents() {
     sf::Event event;
     while (this->window->pollEvent(event)) {
@@ -36,14 +43,29 @@ void Game::run() {
 void Game::render() {
     this->window->clear();
     this->window->draw(this->backgroundSprite);
+    this->animal
     this->window->display();
 }
 
+void Game::updateQueues() {
+    for (auto changedQueue : {leftPlayerQueue, rightPlayerQueue}){
+        auto currentAnimalQueue=changedQueue->getAnimalQueue();
+        if (currentAnimalQueue.empty()) {
+        delete currentAnimalQueue[0];
+        currentAnimalQueue.erase(currentAnimalQueue.begin());
+    }
+    if (currentAnimalQueue.size() < maxQueueSize) {
+        currentAnimalQueue.push_back(changedQueue->generateAnimal());
+    }
+}};
+
 Game::Game() {
+
 
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
+    this->initQueues();
 
 }
 
