@@ -30,6 +30,7 @@ private:
     void initHealthBars();
     void initQueues();
     void updatePollEvents();
+    void update();
     void updateQueues();
     void updateHealthBars();
 

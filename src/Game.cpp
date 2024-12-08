@@ -35,18 +35,27 @@ void Game::updatePollEvents() {
 
 void Game::run() {
     this->lines[0]->addAnimalToTeam1(new WhitePig() );
+    this->lines[0]->addAnimalToTeam2( new BlackPig() );
+    this->leftPlayerHealth = new Health(30, windowHeight / 2 - 250);
     while (this->window->isOpen()) {
         this->updatePollEvents();
+        this->update();
         this->render();
     }
 }
 
+void Game::update() {
+    for (Line* line: lines) {
+        line->update();
+    }
+}
 void Game::render() {
     this->window->clear();
     this->window->draw(this->backgroundSprite);
     for (Line* line: lines) {
         line->render(*this->window);
     }
+    this->leftPlayerHealth->render(*this->window);
     this->window->display();
 }
 

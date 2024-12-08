@@ -5,15 +5,15 @@
 
 class Health {
 public:
-    Health(bool isLeft, float x, float y);
+    Health(float x, float y);
     void render(sf::RenderTarget &target);
     void updateHealth(int healthValue);
 
 private:
     int health;
     sf::RectangleShape healthLine;
-
-    void initHealthLine(float x, float y, bool isLeft);
+    sf::RectangleShape healthOutline;
+    void initHealthLine(float x, float y);
 };
 
 #endif //SHEEPFIGHT_HEALTH_H

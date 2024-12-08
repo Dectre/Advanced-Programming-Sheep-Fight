@@ -19,6 +19,7 @@ public:
     int getTeam1Power();
     int getTeam2Power();
     void checkReachingEndOfTheLine();
+    void animalsAnimation();
     void update();
     void render(sf::RenderTarget& target);
 private:

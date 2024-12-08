@@ -18,6 +18,7 @@ add_executable(SheepFight
         src/Score.h
         src/Animal.cpp
         src/Animal.h
+        src/Health.cpp
 )
 
 

@@ -18,15 +18,19 @@ const int windowHeight = 720;
 enum Direction {LEFT = -1 , RIGHT = 1};
 
 Path BACKGROUND = "sprites/background/background.png";
-Path WHITE_PIG_MOVE = {"sprites/white-pig/move.png"};
-Path WHITE_PIG_STAND = {"sprites/white-pig/stand.png"};
+Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
+Path WHITE_PIG_STAND = "sprites/white-pig/stand.png";
+Path BLACK_PIG_MOVE = "sprites/black-pig/move.png";
+Path BLACK_PIG_STAND = "sprites/black-pig/stand.png";
 
+const int numOfWhitePigMovingAnimations = 4;
+const int numOfBlackPigMovingAnimations = 3;
 const int pigDamage = 2;
 const int goatDamage = 5;
 const int sheepDamage = 8;
-const int pigSpeed = 8;
-const int goatSpeed = 10;
-const int sheepSpeed = 5;
+const float pigSpeed = 2;
+const float goatSpeed = 2.5;
+const float sheepSpeed = 1;
 const int pigPower = 5;
 const int goatPower = 10;
 const int sheepPower = 15;

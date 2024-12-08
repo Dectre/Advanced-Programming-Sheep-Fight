@@ -5,7 +5,6 @@ void Animal::move() {
 }
 
 void Animal::render(sf::RenderTarget& target) {
-    this->setPosition(200,200);
     target.draw(this->sprite);
 }
 
@@ -18,8 +17,31 @@ void Animal::setPosition(const float x, const float y) {
 }
 
 void Animal::initSprite() {
-    this->sprite.setTexture(moveTexture);
+    this->sprite.setTexture(this->moveTexture);
+    this->sprite.setTextureRect(handleAnimation());
 }
+
+void Animal::update() {
+    this->sprite.setTextureRect(handleAnimation());
+}
+
+sf::IntRect Animal::handleAnimation() {
+    const sf::Vector2u textureSize = this->moveTexture.getSize();
+    int eachAnimationSize = textureSize.x / this->numOfAnimations;
+    sf::Time animationTimeElapsed = animationClock.getElapsedTime();
+    if (animationTimeElapsed.asMilliseconds() >= 100) {
+        animationClock.restart();
+        currentAnimationCoefficient = (currentAnimationCoefficient + 1) % numOfAnimations;
+    }
+    sf::IntRect rect;
+    rect.left = eachAnimationSize * currentAnimationCoefficient;
+    rect.width = eachAnimationSize;
+    rect.height = textureSize.y;
+    return rect;
+}
+
+
+
 
 WhitePig::WhitePig() : Animal() {
     this->initVariables();
@@ -33,6 +55,7 @@ void WhitePig::initVariables() {
     this->power = pigPower;
     this->damage = pigDamage;
     this->displayProbability = pigDisplayProbability;
+    this->numOfAnimations = numOfWhitePigMovingAnimations;
 }
 
 void WhitePig::initTexture() {
@@ -41,6 +64,7 @@ void WhitePig::initTexture() {
     if (!this -> standTexture.loadFromFile(WHITE_PIG_STAND))
         cerr << "Could not load White Pig standing texture";
 }
+
 
 void WhiteGoat::initVariables() {
     this->speed = goatSpeed;
@@ -58,12 +82,27 @@ void WhiteSheep::initVariables() {
     this->displayProbability = sheepDisplayProbability;
 }
 
+BlackPig::BlackPig() : Animal() {
+    this->initVariables();
+    this->initTexture();
+    this->initSprite();
+    this->sprite.setPosition(1080,0);
+}
+
 void BlackPig::initVariables() {
     this->speed = pigSpeed;
     this->direction = LEFT;
     this->power = pigPower;
     this->damage = pigDamage;
     this->displayProbability = pigDisplayProbability;
+    this->numOfAnimations = numOfBlackPigMovingAnimations;
+}
+
+void BlackPig::initTexture() {
+    if (!this -> moveTexture.loadFromFile(BLACK_PIG_MOVE))
+        cerr << "Could not load Black Pig moving texture";
+    if (!this -> standTexture.loadFromFile(BLACK_PIG_STAND))
+        cerr << "Could not load Black Pig standing texture";
 }
 
 void BlackGoat::initVariables() {

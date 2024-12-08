@@ -14,9 +14,14 @@ public:
     void setScale(const float xScale, const float yScale);
     void initSprite();
     void render(sf::RenderTarget& target);
+    sf::IntRect handleAnimation();
     void setPosition(const float x, const float y);
     void animalIsFighting() { this-> isFighting = true; }
+    void update();
 protected:
+    sf::Clock animationClock;
+    int numOfAnimations;
+    int currentAnimationCoefficient;
     sf::Sprite sprite;
     sf::Texture standTexture;
     sf::Texture moveTexture;
