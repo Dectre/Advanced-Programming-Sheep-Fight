@@ -37,6 +37,7 @@ void Game::run() {
 void Game::render() {
     this->window->clear();
     this->window->draw(this->backgroundSprite);
+    this->animal
     this->window->display();
 }
 

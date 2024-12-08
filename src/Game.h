@@ -3,6 +3,7 @@
 
 #include "Manual.h"
 
+
 class Game {
 public:
     Game();
