@@ -1,11 +1,7 @@
 #include "Animal.h"
 
-void Animal::move(const float dirX, const float dirY) {
-    this->sprite.move(this->speed * dirX, this->speed * dirY);
-}
-
-void Animal::update() {
-    move(this->direction, 0.f);
+void Animal::move() {
+    this->sprite.move(this->speed * this->direction,0);
 }
 
 void Animal::render(sf::RenderTarget &target) {

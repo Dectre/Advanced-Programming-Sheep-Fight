@@ -8,13 +8,14 @@ public:
     int getPower() { return this->power; }
     int getDamage() { return this->damage; }
     float getDisplayProbability() { return this->displayProbability; };
+    sf::FloatRect getBounds() { return this->sprite.getGlobalBounds(); }
     void changeDirection(Direction newDirection) { this->direction = newDirection; }
-    void move(const float dirX, const float dirY);
-    void update();
+    void move();
     void setScale(const float xScale, const float yScale);
     void initSprite();
     void render(sf::RenderTarget &target);
     void setPosition();
+    void animalIsFighting() { this-> isFighting = true; }
 protected:
     sf::Sprite sprite;
     sf::Texture standTexture;
@@ -24,6 +25,7 @@ protected:
     int power;
     int damage;
     float displayProbability;
+    bool isFighting = false;
 };
 
 class WhitePig : public Animal {
