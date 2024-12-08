@@ -18,7 +18,6 @@ void Game::initBackgroundSprite() {
     float backgroundSizeY = backgroundTexture.getSize().y;
     this->backgroundSprite.setScale(windowWidth / backgroundSizeX, windowHeight/ backgroundSizeY);
 }
-
 void Game::updatePollEvents() {
     sf::Event event;
     while (this->window->pollEvent(event)) {
@@ -42,6 +41,7 @@ void Game::render() {
 }
 
 Game::Game() {
+
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
