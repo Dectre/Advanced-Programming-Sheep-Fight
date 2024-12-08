@@ -63,17 +63,14 @@ void Game::updateQueues() {
 }};
 
 Game::Game() {
-
-
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
+    this->initQueues();
     for (int i = 0; i < numOfLines; ++i) {
         this->lines.push_back(new Line());
     }
 }
-    this->initQueues();
-
 
 Game::~Game() {
     delete this->window;

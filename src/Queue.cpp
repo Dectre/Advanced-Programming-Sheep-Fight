@@ -31,8 +31,8 @@ Animal* Queue::generateAnimal() {
 
     switch (animalType) {
         case 0: return new WhitePig();
-        case 1: return new WhiteGoat();
-        case 2: return new WhiteSheep();
+        //case 1: return new WhiteGoat();
+        //case 2: return new WhiteSheep();
         default: return nullptr;
     }
 };
