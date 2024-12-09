@@ -16,6 +16,7 @@ void Line::moveAnimals() {
             animal->move();
     }
 }
+
 void Line::animalsAnimation() {
     for (Animal* animal : team1Animals) {
         animal->update();
@@ -26,14 +27,13 @@ void Line::animalsAnimation() {
 }
 
 bool Line::checkAnimalCollision(Animal* animal) {
-    /*sf::FloatRect animalBounds = animal->getBounds();
+/*    sf::FloatRect animalBounds = animal->getBounds();
     // White Sheep Only
     for (Animal* blackAnimal : this->team2Animals) {
         sf::FloatRect blackAnimalBounds = blackAnimal->getBounds();
         if (animalBounds.intersects(blackAnimalBounds))
             return true;
-    }
-    return false;*/
+    }*/
     return false;
 }
 

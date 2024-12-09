@@ -40,13 +40,12 @@ sf::IntRect Animal::handleAnimation() {
     return rect;
 }
 
-
-
-
 WhitePig::WhitePig() : Animal() {
     this->initVariables();
     this->initTexture();
     this->initSprite();
+    this->sprite.setScale(-1.f,1.f);
+    this->sprite.setScale(-50/49, 50/49);
 }
 
 void WhitePig::initVariables() {
@@ -56,6 +55,7 @@ void WhitePig::initVariables() {
     this->damage = pigDamage;
     this->displayProbability = pigDisplayProbability;
     this->numOfAnimations = numOfWhitePigMovingAnimations;
+
 }
 
 void WhitePig::initTexture() {

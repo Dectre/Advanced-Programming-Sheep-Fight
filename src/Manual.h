@@ -10,10 +10,11 @@
 #include <map>
 
 using namespace std;
-
+typedef const int PixelSize;
 typedef const string Path;
-const int windowWidth = 1080;
-const int windowHeight = 720;
+
+PixelSize windowWidth = 1080;
+PixelSize windowHeight = 720;
 
 enum Direction {LEFT = -1 , RIGHT = 1};
 
@@ -44,7 +45,6 @@ const int healthBarHeight=500;
 const int healthBarWidth=50;
 const sf::Color healthBarColor(11, 102, 35);
 const int healthBarXPos=30;
-
 
 
 
