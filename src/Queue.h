@@ -9,15 +9,18 @@
 class Queue {
 private:
     vector<Animal*> animalQueue;
-    sf::Vector2f bubblePositions[3];
-    size_t maxQueueSize = 3;
+    void initQueue();
+    void initTexture();
+    Animal* generateAnimal();
+    sf::Sprite sprite;
+    sf::Texture texture;
 
 public:
-    Queue(sf::Vector2f firstBubblePos, float verticalSpacing); //need to be constants
+    Queue();
     ~Queue();
     void render(sf::RenderTarget& target);
-    vector <Animal*> getAnimalQueue();
-    Animal* generateAnimal();
+    void update();
+    Animal* getFirstAnimal();
 };
 
 #endif //SHEEPFIGHT_QUEUE_H

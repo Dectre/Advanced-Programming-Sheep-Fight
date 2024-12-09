@@ -23,6 +23,7 @@ protected:
     int numOfAnimations;
     int currentAnimationCoefficient;
     sf::Sprite sprite;
+    sf::Sprite queueSprite;
     sf::Texture standTexture;
     sf::Texture moveTexture;
     float speed;

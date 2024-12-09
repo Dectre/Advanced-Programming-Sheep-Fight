@@ -63,6 +63,8 @@ void WhitePig::initTexture() {
         cerr << "Could not load White Pig moving texture";
     if (!this -> standTexture.loadFromFile(WHITE_PIG_STAND))
         cerr << "Could not load White Pig standing texture";
+    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
+        cerr << "Could not load White Pig standing texture";*/
 }
 
 
@@ -87,6 +89,7 @@ BlackPig::BlackPig() : Animal() {
     this->initTexture();
     this->initSprite();
     this->sprite.setPosition(1080,0);
+
 }
 
 void BlackPig::initVariables() {
@@ -103,6 +106,7 @@ void BlackPig::initTexture() {
         cerr << "Could not load Black Pig moving texture";
     if (!this -> standTexture.loadFromFile(BLACK_PIG_STAND))
         cerr << "Could not load Black Pig standing texture";
+
 }
 
 void BlackGoat::initVariables() {

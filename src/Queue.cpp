@@ -1,15 +1,18 @@
 #include "Queue.h"
 
-Queue::Queue(sf::Vector2f firstBubblePos, float verticalSpacing) {
-    srand(static_cast<unsigned>(time(nullptr)));
+Queue::Queue() {
+    initQueue();
+    //initTexture();
+    //initSprite();
+};
+void Queue::initQueue(){
+    for (int i=0;i<queueSize;i++){
+        this->animalQueue.push_back(generateAnimal());}
 
-    for (size_t i = 0; i < maxQueueSize; ++i) {
-        bubblePositions[i] = sf::Vector2f(firstBubblePos.x, firstBubblePos.y + i * verticalSpacing);
-    }
+};
 
-    for (size_t i = 0; i < maxQueueSize; ++i) {
-        this->animalQueue.push_back(this->generateAnimal());
-    }
+void Queue::initTexture(){
+
 };
 
 Queue::~Queue() {
@@ -22,9 +25,9 @@ Queue::~Queue() {
 
 Animal* Queue::generateAnimal() {
     vector<int> animalPool;
-    animalPool.insert(animalPool.end(), 5, 0); // 5 WhitePigs
-    animalPool.insert(animalPool.end(), 3, 1); // 3 WhiteGoats
-    animalPool.insert(animalPool.end(), 2, 2); // 2 WhiteSheep
+    animalPool.insert(animalPool.end(), pigDisplayProbability, 0); // 5 WhitePigs
+    animalPool.insert(animalPool.end(), goatDisplayProbability, 1); // 3 WhiteGoats
+    animalPool.insert(animalPool.end(), sheepDisplayProbability, 2); // 2 WhiteSheep
 
     int randomIndex = rand() % animalPool.size();
     int animalType = animalPool[randomIndex];
@@ -37,7 +40,10 @@ Animal* Queue::generateAnimal() {
     }
 };
 
-vector <Animal*> Queue::getAnimalQueue(){
-    return animalQueue;
+Animal* Queue::getFirstAnimal(){
+    return animalQueue[0];
 }
-
+void Queue::update(){
+        animalQueue.insert(animalQueue.begin(), generateAnimal());
+        animalQueue.pop_back();
+}

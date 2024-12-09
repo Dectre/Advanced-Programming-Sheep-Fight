@@ -5,6 +5,7 @@
 
 class Health {
 public:
+    //HEALTH BARS REDUCING IS NOT FIXED
     Health(float x, float y);
     void render(sf::RenderTarget &target);
     void updateHealth(int healthValue);

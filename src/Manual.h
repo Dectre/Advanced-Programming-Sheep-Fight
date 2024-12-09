@@ -16,7 +16,7 @@ typedef const string Path;
 PixelSize windowWidth = 1080;
 PixelSize windowHeight = 720;
 
-enum Direction {LEFT = -1 , RIGHT = 1};
+enum Direction {LEFT = -1 , RIGHT = 1, UP=1, DOWN=-1};
 
 Path BACKGROUND = "sprites/background/background.png";
 Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
@@ -38,7 +38,6 @@ const int sheepPower = 15;
 const int pigDisplayProbability = 5;
 const int goatDisplayProbability = 3;
 const int sheepDisplayProbability = 2;
-const int maxQueueSize=3;
 const int numOfLines = 4;
 const int queueSize=3;
 const int healthBarHeight=500;

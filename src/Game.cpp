@@ -20,13 +20,13 @@ void Game::initBackgroundSprite() {
 }
 
 void Game::initQueues() {
-    this->leftPlayerQueue = new Queue(sf::Vector2f(50.f, 50.f), 80.f);
-    this->rightPlayerQueue = new Queue(sf::Vector2f(900.f, 50.f), 80.f);
+    this->playerOneQueue = new Queue();
+    this->playerTwoQueue = new Queue();
 }
 
 void Game::initHealthBars() {
-    this->leftPlayerHealth = new Health(healthBarXPos, windowHeight / 2 - 250);
-    this->rightPlayerHealth= new Health(windowWidth-2*healthBarXPos-healthBarWidth, windowHeight / 2 - 250);
+    this->playerOneHealth = new Health(healthBarXPos, windowHeight / 2 - 250);
+    this->playerTwoHealth= new Health(windowWidth - 2 * healthBarXPos - healthBarWidth, windowHeight / 2 - 250);
 }
 
 
@@ -36,6 +36,33 @@ void Game::updatePollEvents() {
         if (event.Event::type == sf::Event::Closed)
             this->window->close();
     }
+}
+
+void Game::updateInput() {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) ) {
+        this->playerOne.setLinePointer(UP);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        this->playerOne.setLinePointer(DOWN);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        this->playerTwo.setLinePointer(UP);
+
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ){
+        this->playerTwo.setLinePointer(DOWN);
+
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+        //check if animal can be sent
+        this->playerOneQueue->update();
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+        //check if animal can be sent
+        this->playerTwoQueue->update();
+    }
+
 }
 
 
@@ -58,8 +85,9 @@ void Game::update() {
     for (Line* line: lines) {
         line->update();
     }
-    leftPlayerHealth->updateHealth(leftPlayer.getHealth());
-    rightPlayerHealth->updateHealth(rightPlayer.getHealth());
+    updateInput();
+    playerOneHealth->updateHealth(playerOne.getHealth());
+    playerTwoHealth->updateHealth(playerTwo.getHealth());
 
 }
 void Game::render() {
@@ -68,9 +96,8 @@ void Game::render() {
     for (Line* line: lines) {
         line->render(*this->window);
     }
-    this->window->draw(lineRect);
-    this->leftPlayerHealth->render(*this->window);
-    this->rightPlayerHealth->render(*this->window);
+    this->playerOneHealth->render(*this->window);
+    this->playerTwoHealth->render(*this->window);
     this->window->display();
 }
 
