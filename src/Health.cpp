@@ -1,6 +1,6 @@
 #include "Health.h"
 
-Health::Health(float x, float y) : health(50) {
+Health::Health(float x, float y) : health(100) {
     this->initHealthLine(x, y);
 }
 

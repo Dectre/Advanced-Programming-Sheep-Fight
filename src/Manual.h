@@ -46,7 +46,11 @@ const int healthBarWidth=50;
 const sf::Color healthBarColor(11, 102, 35);
 const int healthBarXPos=30;
 
-
+PixelSize lineRectWidth = 815;
+PixelSize lineRectHeight = 85;
+PixelSize lineDistance = 70;
+const int lineRectX = 115;
+const int lineRectY = 100 + 3 * lineRectHeight + lineDistance + 60 + 60;
 
 
 #endif //SHEEPFIGHT_MANUAL_H

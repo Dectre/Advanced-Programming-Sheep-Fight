@@ -42,6 +42,11 @@ void Game::updatePollEvents() {
 void Game::run() {
     this->lines[0]->addAnimalToTeam1(new WhitePig() );
     this->lines[0]->addAnimalToTeam2( new BlackPig() );
+    lineRect.setSize(sf::Vector2f (lineRectWidth,lineRectHeight));
+    lineRect.setFillColor(sf::Color::Transparent);
+    lineRect.setOutlineColor(sf::Color::White);
+    lineRect.setOutlineThickness(3);
+    lineRect.setPosition(lineRectX, lineRectY);
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->update();
@@ -63,6 +68,7 @@ void Game::render() {
     for (Line* line: lines) {
         line->render(*this->window);
     }
+    this->window->draw(lineRect);
     this->leftPlayerHealth->render(*this->window);
     this->rightPlayerHealth->render(*this->window);
     this->window->display();

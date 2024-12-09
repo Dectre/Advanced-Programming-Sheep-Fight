@@ -10,12 +10,13 @@
 
 class Game {
 private:
+
     sf::RenderWindow* window;
     Health* leftPlayerHealth;  // Health bar for left player.
     Health* rightPlayerHealth; // Health bar for right player.
     Player leftPlayer;
     Player rightPlayer;
-
+    sf::RectangleShape lineRect;
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
     Queue* leftPlayerQueue;  // Queue for Player 1
