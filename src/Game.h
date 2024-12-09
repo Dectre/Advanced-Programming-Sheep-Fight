@@ -11,15 +11,15 @@
 class Game {
 private:
     sf::RenderWindow* window;
-    Health* leftPlayerHealth;  // Health bar for left player.
-    Health* rightPlayerHealth; // Health bar for right player.
-    Player leftPlayer;
-    Player rightPlayer;
+    Health* playerOneHealth;  // Health bar for left player.
+    Health* playerTwoHealth; // Health bar for right player.
+    Player playerOne;
+    Player playerTwo;
 
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
-    Queue* leftPlayerQueue;  // Queue for Player 1
-    Queue* rightPlayerQueue; // Queue for Player 2
+    Queue* playerOneQueue;
+    Queue* playerTwoQueue;
 
     vector<Line*> lines;
 
@@ -30,6 +30,7 @@ private:
     void initHealthBars();
     void initQueues();
     void updatePollEvents();
+    void updateInput();
     void update();
 
 public:
