@@ -3,6 +3,10 @@
 
 
 class Player {
+public:
+    int getHealth();
+private:
+    int health;
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

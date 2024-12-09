@@ -13,8 +13,8 @@ private:
     sf::RenderWindow* window;
     Health* leftPlayerHealth;  // Health bar for left player.
     Health* rightPlayerHealth; // Health bar for right player.
-    //Player leftPlayer;
-    //Player rightPlayer;
+    Player leftPlayer;
+    Player rightPlayer;
 
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
@@ -31,8 +31,6 @@ private:
     void initQueues();
     void updatePollEvents();
     void update();
-    void updateQueues();
-    void updateHealthBars();
 
 public:
     Game();

@@ -39,6 +39,14 @@ const int goatDisplayProbability = 3;
 const int sheepDisplayProbability = 2;
 const int maxQueueSize=3;
 const int numOfLines = 4;
+const int queueSize=3;
+const int healthBarHeight=500;
+const int healthBarWidth=50;
+const sf::Color healthBarColor(11, 102, 35);
+const int healthBarXPos=30;
+
+
+
 
 
 #endif //SHEEPFIGHT_MANUAL_H
