@@ -1,23 +1,24 @@
 #include "Queue.h"
 
-Queue::Queue() {
-    initQueue();
-    //initTexture();
-    //initSprite();
+Queue::Queue(int player) {
+    initQueue(player);
 };
 void Queue::initQueue(int player){
-    for (int i=0;i<queueSize;i++){
-        this->animalQueue.push_back(generateAnimal(player));}
+    for (int i = 0; i < queueSize; i++) {
+        Animal* animal = generateAnimal(player);
+        this->animalQueue.push_back(animal);
 
-};
+        sf::Sprite sprite;
+        sprite.setTexture(animal->getQueueTexture());
+        if (player==1){
+        sprite.setPosition(queueXpos+i*spaceBetweenQueueBubbles, queueYPos);}
+        if (player==2){
+            sprite.setPosition(queueXpos+i*spaceBetweenQueueBubbles, windowHeight-queueYPos);
+        }
 
-void Queue::initTexture(){
-    for (auto& animal : this->animalQueue) {
-        if ()
-            cerr << "Could not load White Pig moving texture";
+        this->queueSprites.push_back(sprite);
     }
 };
-
 Queue::~Queue() {
     for (auto& animal : this->animalQueue) {
         delete animal;
@@ -34,26 +35,59 @@ Animal* Queue::generateAnimal(int player) {
 
     int randomIndex = rand() % animalPool.size();
     int animalType = animalPool[randomIndex];
+    Animal* newAnimal = nullptr;
 if (player==1){
     switch (animalType) {
-        case 0: return new WhitePig();
-            case 1: return new WhiteGoat();
-            case 2: return new WhiteSheep();
+        case 0: { newAnimal =  new WhitePig(); break;};
+            case 1: {newAnimal=new WhiteGoat(); break;}
+            case 2: {newAnimal=new WhiteSheep(); break;}
         default: return nullptr;
     }}
 if (player==2){
     switch (animalType) {
-        case 0: return new BlackPig();
-        case 1: return new BlackGoat();
-        case 2: return new BlackSheep();
-        default: return nullptr;
-    }}
+        case 0: { newAnimal = new BlackPig(); break;};
+        case 1: {newAnimal=new BlackGoat(); break;}
+        case 2: {newAnimal=new BlackSheep(); break;}
+        default: return nullptr;    }}
+    if (newAnimal) {
+        string textureKey = string(player == 1 ? "White" : "Black") + (animalType == 0 ? "Pig" : animalType == 1 ? "Goat" : "Sheep");
+        newAnimal->setTexture(animalTextures[textureKey]);
+    }
+    return newAnimal;
 };
 
 Animal* Queue::getFirstAnimal(){
     return animalQueue[0];
 }
-void Queue::update(){
-    animalQueue.insert(animalQueue.begin(), generateAnimal());
-    animalQueue.pop_back();
+void Queue::update(int player){
+    delete this->animalQueue.back();
+    this->animalQueue.pop_back();
+    this->queueSprites.pop_back();
+
+    Animal* newAnimal = generateAnimal(player);
+    this->animalQueue.insert(this->animalQueue.begin(), newAnimal);
+
+    sf::Sprite newSprite;
+    newSprite.setTexture(newAnimal->getQueueTexture());
+    newSprite.setPosition(30, 20);
+
+    this->queueSprites.insert(this->queueSprites.begin(), newSprite);
+    if (player==1){
+        for (size_t i = 0; i < this->queueSprites.size(); ++i) {
+            this->queueSprites[i].setPosition(queueXpos+i*spaceBetweenQueueBubbles, queueYPos);
+        }
+    }
+    if (player==2){
+        for (size_t i = 0; i < this->queueSprites.size(); ++i) {
+            this->queueSprites[i].setPosition(queueXpos+i*spaceBetweenQueueBubbles, windowHeight-queueYPos);
+        }
+    }
+
+
+}
+
+void Queue::render(sf::RenderTarget& target) {
+    for (auto& sprite : this->queueSprites) {
+        target.draw(sprite);
+    }
 }

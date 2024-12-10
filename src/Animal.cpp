@@ -1,5 +1,5 @@
 #include "Animal.h"
-
+//ERRORS FOR QUEUE TEXTURES NEED TO BE FIXED
 void Animal::move() {
     this->sprite.move(this->speed * this->direction,0);
 }
@@ -14,10 +14,18 @@ void Animal::setScale(PixelSize animalWidth, PixelSize animalHeight, int mirror)
             sprite.getTexture()->getSize().y * sprite.getScale().y);
     this->sprite.setScale(mirror * animalWidth / spriteSize.x , animalHeight / spriteSize.y);
 }
+sf::Texture Animal::getQueueTexture()  {
+    return this->queueTexture;
+}
 
 void Animal::setPosition(const float x, const float y) {
     this->sprite.setPosition(x, y);
 }
+
+void Animal::setTexture(const sf::Texture& texture) {
+    this->sprite.setTexture(texture);
+}
+
 
 void Animal::initSprite() {
     this->sprite.setTexture(this->moveTexture);
@@ -67,8 +75,8 @@ void WhitePig::initTexture() {
         cerr << "Could not load White Pig moving texture";
     if (!this -> standTexture.loadFromFile(WHITE_PIG_STAND))
         cerr << "Could not load White Pig standing texture";
-    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";*/
+    if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 }
 
 WhiteGoat::WhiteGoat() : Animal() {
@@ -94,8 +102,8 @@ void WhiteGoat::initTexture() {
         cerr << "Could not load White Goat moving texture";
     if (!this -> standTexture.loadFromFile(WHITE_GOAT_STAND))
         cerr << "Could not load White Goat standing texture";
-    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";*/
+    if (!this -> queueTexture.loadFromFile(WHITE_GOAT_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 }
 
 WhiteSheep::WhiteSheep() : Animal() {
@@ -121,8 +129,8 @@ void WhiteSheep::initTexture() {
         cerr << "Could not load White Sheep moving texture";
     if (!this -> standTexture.loadFromFile(WHITE_SHEEP_STAND))
         cerr << "Could not load White Sheep standing texture";
-    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";*/
+    if (!this -> queueTexture.loadFromFile(WHITE_SHEEP_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 }
 
 BlackPig::BlackPig() : Animal() {
@@ -148,6 +156,8 @@ void BlackPig::initTexture() {
         cerr << "Could not load Black Pig moving texture";
     if (!this -> standTexture.loadFromFile(BLACK_PIG_STAND))
         cerr << "Could not load Black Pig standing texture";
+    if (!this -> queueTexture.loadFromFile(BLACK_PIG_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 
 }
 
@@ -174,8 +184,8 @@ void BlackGoat::initTexture() {
         cerr << "Could not load Black Goat moving texture";
     if (!this -> standTexture.loadFromFile(BLACK_GOAT_STAND))
         cerr << "Could not load Black Goat standing texture";
-    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";*/
+    if (!this -> queueTexture.loadFromFile(BLACK_GOAT_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 }
 
 BlackSheep::BlackSheep() : Animal() {
@@ -202,6 +212,6 @@ void BlackSheep::initTexture() {
         cerr << "Could not load Black Sheep moving texture";
     if (!this -> standTexture.loadFromFile(BLACK_SHEEP_STAND))
         cerr << "Could not load Black Sheep standing texture";
-    /*if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";*/
+    if (!this -> queueTexture.loadFromFile(BLACK_SHEEP_QUEUE))
+        cerr << "Could not load White Pig standing texture";
 }

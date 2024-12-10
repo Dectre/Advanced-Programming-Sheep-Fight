@@ -20,8 +20,8 @@ void Game::initBackgroundSprite() {
 }
 
 void Game::initQueues() {
-    this->playerOneQueue = new Queue();
-    this->playerTwoQueue = new Queue();
+    this->playerOneQueue = new Queue(WHITE_PLAYER);
+    this->playerTwoQueue = new Queue(BLACK_PLAYER);
 }
 
 void Game::initHealthBars() {
@@ -56,11 +56,11 @@ void Game::updateInput() {
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         //check if animal can be sent
-        this->playerOneQueue->update();
+        this->playerOneQueue->update(WHITE_PLAYER);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
         //check if animal can be sent
-        this->playerTwoQueue->update();
+        this->playerTwoQueue->update(BLACK_PLAYER);
     }
 
 }
@@ -103,6 +103,9 @@ void Game::render() {
     }
     this->playerOneHealth->render(*this->window);
     this->playerTwoHealth->render(*this->window);
+    this->playerOneQueue->render(*this->window);
+    this->playerTwoQueue->render(*this->window);
+
     this->window->display();
 }
 
@@ -112,11 +115,11 @@ Game::Game() {
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
-    this->initQueues();
     this->initHealthBars();
     for (int i = 0; i < numOfLines; ++i) {
         this->lines.push_back(new Line());
     }
+    this->initQueues();
 }
 
 Game::~Game() {

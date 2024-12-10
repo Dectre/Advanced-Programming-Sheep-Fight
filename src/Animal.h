@@ -18,6 +18,8 @@ public:
     void setPosition(const float x, const float y);
     void animalIsFighting() { this-> isFighting = true; }
     void update();
+    void setTexture(const sf::Texture& texture);
+    sf::Texture getQueueTexture();
 protected:
     sf::Clock animationClock;
     int numOfAnimations;
@@ -26,7 +28,7 @@ protected:
     sf::Sprite sprite;
     sf::Texture standTexture;
     sf::Texture moveTexture;
-    sf::Sprite queueSprite;
+    sf::Texture queueTexture;
     float speed;
     Direction direction;
     int power;
@@ -38,9 +40,9 @@ protected:
 class WhitePig : public Animal {
 public:
     WhitePig();
-    void initTexture();
 private:
     void initVariables();
+    void initTexture();
 };
 
 class WhiteGoat : public Animal {

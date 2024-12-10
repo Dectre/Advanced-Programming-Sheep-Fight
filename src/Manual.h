@@ -18,7 +18,7 @@ PixelSize windowHeight = 720;
 
 enum Direction {LEFT = -1, RIGHT = 1, UP=1, DOWN=-1};
 
-enum Player {WHITE_PLAYER=1, BLACK_PLAYER=2};
+enum PLAYER_NUM {WHITE_PLAYER=1, BLACK_PLAYER=2};
 
 Path BACKGROUND = "sprites/background/background.png";
 Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
@@ -85,6 +85,10 @@ const int goatHeight= 86;
 
 const int sheepWidth = 90;
 const int sheepHeight = 70;
+
+const int queueXpos=500;
+const int queueYPos=100;
+const int spaceBetweenQueueBubbles=100;
 
 
 
