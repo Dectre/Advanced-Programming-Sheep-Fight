@@ -11,7 +11,7 @@ public:
     sf::FloatRect getBounds() { return this->sprite.getGlobalBounds(); }
     void changeDirection(Direction newDirection) { this->direction = newDirection; }
     void move();
-    void setScale(const float xScale, const float yScale);
+    void setScale(PixelSize animalWidth, PixelSize animalHeight, int mirror = 1);
     void initSprite();
     void render(sf::RenderTarget& target);
     sf::IntRect handleAnimation();
@@ -22,6 +22,7 @@ protected:
     sf::Clock animationClock;
     int numOfAnimations;
     int currentAnimationCoefficient;
+    int animationTime;
     sf::Sprite sprite;
     sf::Sprite queueSprite;
     sf::Texture standTexture;

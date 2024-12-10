@@ -69,6 +69,11 @@ void Game::updateInput() {
 void Game::run() {
     this->lines[0]->addAnimalToTeam1(new WhitePig() );
     this->lines[0]->addAnimalToTeam2( new BlackPig() );
+    this->lines[0]->addAnimalToTeam1(new WhiteGoat() );
+    this->lines[0]->addAnimalToTeam2( new BlackGoat() );
+    this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
+    this->lines[0]->addAnimalToTeam2( new BlackSheep() );
+
     lineRect.setSize(sf::Vector2f (lineRectWidth,lineRectHeight));
     lineRect.setFillColor(sf::Color::Transparent);
     lineRect.setOutlineColor(sf::Color::White);
