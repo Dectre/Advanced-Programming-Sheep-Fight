@@ -57,11 +57,11 @@ void Game::updateInput(sf::Event event) {
         }
         if (event.key.code == sf::Keyboard::Space) {
             this->testInd->Hide();
-            this->playerOneQueue->update();
+            this->playerOneQueue->update(WHITE_PLAYER);
         }
         if (event.key.code == sf::Keyboard::Enter) {
             this->testInd->Hide();
-            this->playerTwoQueue->update();
+            this->playerTwoQueue->update(BLACK_PLAYER);
         }
     }
 }
