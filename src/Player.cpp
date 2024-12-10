@@ -1,7 +1,12 @@
 #include "Player.h"
 
-void Player::setLinePointer(int direction){
-    linePointer=(direction+linePointer)%4;
+void Player::setIndicator(int direction) {
 }
 
-int Player::getHealth(){return health;};
+Player::Player(int playerNumber) {
+    initVariables(playerNumber);
+};
+
+void Player::initVariables(int playerNumber) {
+    this->indicator = new Indicator(playerNumber);
+}

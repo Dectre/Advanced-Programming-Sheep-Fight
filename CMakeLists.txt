@@ -19,6 +19,8 @@ add_executable(SheepFight
         src/Animal.cpp
         src/Animal.h
         src/Health.cpp
+        src/Indicator.cpp
+        src/Indicator.h
 )
 
 

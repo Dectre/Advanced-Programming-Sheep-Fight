@@ -3,14 +3,18 @@
 
 #include "Manual.h"
 #include "Line.h"
+#include "Indicator.h"
+
 class Player {
 public:
-    int getHealth();
-    void setLinePointer(int direction);
-
+    Player(int playerNumber);
+    int getHealth(){return health;}
+    void setIndicator(int direction);
 private:
-    int health=10;
-    int linePointer;
+
+    void initVariables(int playerNumber);
+    Indicator* indicator;
+    int health;
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

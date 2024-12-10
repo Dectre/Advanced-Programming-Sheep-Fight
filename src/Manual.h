@@ -16,11 +16,13 @@ typedef const string Path;
 PixelSize windowWidth = 1080;
 PixelSize windowHeight = 720;
 
-enum Direction {LEFT = -1, RIGHT = 1, UP=1, DOWN=-1};
+enum Direction {LEFT = -1, RIGHT = 1, UP=-1, DOWN=1};
 
 enum PLAYER_NUM {WHITE_PLAYER=1, BLACK_PLAYER=2};
 
 Path BACKGROUND = "sprites/background/background.png";
+Path TEAM1_POINTER = "sprites/red-gradient.png";
+Path TEAM2_POINTER = "sprites/blue-gradient.png";
 Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
 Path WHITE_PIG_STAND = "sprites/white-pig/stand.png";
 Path WHITE_PIG_QUEUE = "sprites/white-pig/queue.png";
@@ -73,8 +75,8 @@ const int healthBarXPos=30;
 
 PixelSize lineRectWidth = 815;
 PixelSize lineRectHeight = 85;
-PixelSize lineDistance = 70;
-const int lineRectX = 115;
+const vector<int> lineDistance = {70, 60, 60};
+const int lineRectX = 135;
 const int lineRectY = 100;
 
 const int pigWidth = 90;

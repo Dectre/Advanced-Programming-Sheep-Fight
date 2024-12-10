@@ -35,34 +35,35 @@ void Game::updatePollEvents() {
     while (this->window->pollEvent(event)) {
         if (event.Event::type == sf::Event::Closed)
             this->window->close();
+        updateInput(event);
     }
 }
 
-void Game::updateInput() {
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) ) {
-        this->playerOne.setLinePointer(UP);
+void Game::updateInput(sf::Event event) {
+    if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::W) {
+            this->testInd->Show();
+            this->testInd->indicatorMove(UP);
+        }
+        if (event.key.code == sf::Keyboard::S) {
+            this->testInd->Show();
+            this->testInd->indicatorMove(DOWN);
+        }
+        if (event.key.code == sf::Keyboard::Up) {
+            //this->playerTwo.setLinePointer(UP);
+        }
+        if (event.key.code == sf::Keyboard::Down) {
+            //this->playerTwo.setLinePointer(DOWN);
+        }
+        if (event.key.code == sf::Keyboard::Space) {
+            this->testInd->Hide();
+            this->playerOneQueue->update();
+        }
+        if (event.key.code == sf::Keyboard::Enter) {
+            this->testInd->Hide();
+            this->playerTwoQueue->update();
+        }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        this->playerOne.setLinePointer(DOWN);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        this->playerTwo.setLinePointer(UP);
-
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ){
-        this->playerTwo.setLinePointer(DOWN);
-
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-        //check if animal can be sent
-        this->playerOneQueue->update(WHITE_PLAYER);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-        //check if animal can be sent
-        this->playerTwoQueue->update(BLACK_PLAYER);
-    }
-
 }
 
 
@@ -73,7 +74,7 @@ void Game::run() {
     this->lines[0]->addAnimalToTeam2( new BlackGoat() );
     this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
     this->lines[0]->addAnimalToTeam2( new BlackSheep() );
-
+    this->testInd = new Indicator(1);
     lineRect.setSize(sf::Vector2f (lineRectWidth,lineRectHeight));
     lineRect.setFillColor(sf::Color::Transparent);
     lineRect.setOutlineColor(sf::Color::White);
@@ -90,9 +91,9 @@ void Game::update() {
     for (Line* line: lines) {
         line->update();
     }
-    updateInput();
-    playerOneHealth->updateHealth(playerOne.getHealth());
-    playerTwoHealth->updateHealth(playerTwo.getHealth());
+    playerOneHealth->updateHealth(playerOne->getHealth());
+    playerTwoHealth->updateHealth(playerTwo->getHealth());
+    //this->updateInput();
 
 }
 void Game::render() {
@@ -103,6 +104,7 @@ void Game::render() {
     }
     this->playerOneHealth->render(*this->window);
     this->playerTwoHealth->render(*this->window);
+    this->testInd->render(*this->window);
     this->playerOneQueue->render(*this->window);
     this->playerTwoQueue->render(*this->window);
 
@@ -112,6 +114,8 @@ void Game::render() {
 
 
 Game::Game() {
+    this->playerOne = new Player(1);
+    this->playerTwo = new Player(2);
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();

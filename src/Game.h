@@ -1,10 +1,9 @@
 #ifndef SHEEPFIGHT_GAME_H
 #define SHEEPFIGHT_GAME_H
-
-#include "Health.h"
 #include "Player.h"
+#include "Health.h"
+#include "Indicator.h"
 #include "Queue.h"
-
 #include "Line.h"
 
 
@@ -14,14 +13,14 @@ private:
     sf::RenderWindow* window;
     Health* playerOneHealth;  // Health bar for left player.
     Health* playerTwoHealth; // Health bar for right player.
-    Player playerOne;
-    Player playerTwo;
+    Player* playerOne;
+    Player* playerTwo;
     sf::RectangleShape lineRect;
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
     Queue* playerOneQueue;
     Queue* playerTwoQueue;
-
+    Indicator* testInd;
     vector<Line*> lines;
 
     void initWindow();
@@ -31,7 +30,7 @@ private:
     void initHealthBars();
     void initQueues();
     void updatePollEvents();
-    void updateInput();
+    void updateInput(sf::Event event);
     void update();
 
 public:
