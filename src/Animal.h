@@ -24,9 +24,9 @@ protected:
     int currentAnimationCoefficient;
     int animationTime;
     sf::Sprite sprite;
-    sf::Sprite queueSprite;
     sf::Texture standTexture;
     sf::Texture moveTexture;
+    sf::Sprite queueSprite;
     float speed;
     Direction direction;
     int power;
@@ -38,9 +38,9 @@ protected:
 class WhitePig : public Animal {
 public:
     WhitePig();
+    void initTexture();
 private:
     void initVariables();
-    void initTexture();
 };
 
 class WhiteGoat : public Animal {

@@ -18,19 +18,27 @@ PixelSize windowHeight = 720;
 
 enum Direction {LEFT = -1, RIGHT = 1, UP=1, DOWN=-1};
 
+enum Player {WHITE_PLAYER=1, BLACK_PLAYER=2};
+
 Path BACKGROUND = "sprites/background/background.png";
 Path WHITE_PIG_MOVE = "sprites/white-pig/move.png";
 Path WHITE_PIG_STAND = "sprites/white-pig/stand.png";
+Path WHITE_PIG_QUEUE = "sprites/white-pig/queue.png";
 Path BLACK_PIG_MOVE = "sprites/black-pig/move.png";
 Path BLACK_PIG_STAND = "sprites/black-pig/stand.png";
+Path BLACK_PIG_QUEUE = "sprites/black-pig/queue.png";
 Path WHITE_GOAT_MOVE = "sprites/white-goat/move.png";
 Path WHITE_GOAT_STAND = "sprites/white-goat/stand.png";
+Path WHITE_GOAT_QUEUE = "sprites/white-goat/queue.png";
 Path BLACK_GOAT_MOVE = "sprites/black-goat/move.png";
 Path BLACK_GOAT_STAND = "sprites/black-goat/stand.png";
+Path BLACK_GOAT_QUEUE = "sprites/black-goat/queue.png";
 Path WHITE_SHEEP_MOVE = "sprites/white-sheep/move.png";
 Path WHITE_SHEEP_STAND = "sprites/white-sheep/stand.png";
+Path WHITE_SHEEP_QUEUE = "sprites/white-sheep/queue.png";
 Path BLACK_SHEEP_MOVE = "sprites/black-sheep/move.png";
 Path BLACK_SHEEP_STAND = "sprites/black-sheep/stand.png";
+Path BLACK_SHEEP_QUEUE = "sprites/black-sheep/queue.png";
 
 const int numOfWhitePigMovingAnimations = 4;
 const int whitePigAnimationTime = 100;

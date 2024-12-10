@@ -9,9 +9,10 @@
 class Queue {
 private:
     vector<Animal*> animalQueue;
-    void initQueue();
+    vector <sf::Texture> animalTextures;
+    void initQueue(int player);
     void initTexture();
-    Animal* generateAnimal();
+    Animal* generateAnimal(int player);
     sf::Sprite sprite;
     sf::Texture texture;
 
@@ -20,7 +21,10 @@ public:
     ~Queue();
     void render(sf::RenderTarget& target);
     void update();
+    int player;
     Animal* getFirstAnimal();
+
+
 };
 
 #endif //SHEEPFIGHT_QUEUE_H
