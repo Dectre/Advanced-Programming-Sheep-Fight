@@ -14,9 +14,7 @@ void Animal::setScale(PixelSize animalWidth, PixelSize animalHeight, int mirror)
             sprite.getTexture()->getSize().y * sprite.getScale().y);
     this->sprite.setScale(mirror * animalWidth / spriteSize.x , animalHeight / spriteSize.y);
 }
-sf::Texture Animal::getQueueTexture()  {
-    return this->queueTexture;
-}
+
 
 void Animal::setPosition(const float x, const float y) {
     this->sprite.setPosition(x, y);

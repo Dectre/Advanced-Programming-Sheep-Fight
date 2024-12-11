@@ -20,7 +20,8 @@ private:
     sf::Sprite backgroundSprite;
     Queue* playerOneQueue;
     Queue* playerTwoQueue;
-    Indicator* testInd;
+    Indicator* testInd1;
+    Indicator* testInd2;
     vector<Line*> lines;
 
     void initWindow();

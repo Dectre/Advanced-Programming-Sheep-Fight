@@ -8,13 +8,15 @@
 class Player {
 public:
     Player(int playerNumber);
-    int getHealth(){return health;}
+    int getHealth(){return this->health;}
     void setIndicator(int direction);
+    float getStartPoint() {return this->startPointX;}
 private:
 
     void initVariables(int playerNumber);
     Indicator* indicator;
     int health;
+    float startPointX;
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

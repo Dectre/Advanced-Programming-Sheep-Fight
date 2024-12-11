@@ -11,7 +11,7 @@ void Queue::initQueue(int player){
         sf::Sprite sprite;
         sprite.setTexture(animal->getQueueTexture());
         if (player==1){
-        sprite.setPosition(queueXpos+i*spaceBetweenQueueBubbles, queueYPos);}
+            sprite.setPosition(queueXpos+i*spaceBetweenQueueBubbles, queueYPos);}
         if (player==2){
             sprite.setPosition(queueXpos+i*spaceBetweenQueueBubbles, windowHeight-queueYPos);
         }
@@ -36,19 +36,19 @@ Animal* Queue::generateAnimal(int player) {
     int randomIndex = rand() % animalPool.size();
     int animalType = animalPool[randomIndex];
     Animal* newAnimal = nullptr;
-if (player==1){
-    switch (animalType) {
-        case 0: { newAnimal =  new WhitePig(); break;};
+    if (player==1){
+        switch (animalType) {
+            case 0: { newAnimal =  new WhitePig(); break;};
             case 1: {newAnimal=new WhiteGoat(); break;}
             case 2: {newAnimal=new WhiteSheep(); break;}
-        default: return nullptr;
-    }}
-if (player==2){
-    switch (animalType) {
-        case 0: { newAnimal = new BlackPig(); break;};
-        case 1: {newAnimal=new BlackGoat(); break;}
-        case 2: {newAnimal=new BlackSheep(); break;}
-        default: return nullptr;    }}
+            default: return nullptr;
+        }}
+    if (player==2){
+        switch (animalType) {
+            case 0: { newAnimal = new BlackPig(); break;};
+            case 1: {newAnimal=new BlackGoat(); break;}
+            case 2: {newAnimal=new BlackSheep(); break;}
+            default: return nullptr;    }}
     if (newAnimal) {
         string textureKey = string(player == 1 ? "White" : "Black") + (animalType == 0 ? "Pig" : animalType == 1 ? "Goat" : "Sheep");
         newAnimal->setTexture(animalTextures[textureKey]);

@@ -8,5 +8,7 @@ Player::Player(int playerNumber) {
 };
 
 void Player::initVariables(int playerNumber) {
-    this->indicator = new Indicator(playerNumber);
+    if (playerNumber == WHITE_PLAYER) this->startPointX = playerOneStartPoint;
+    else this->startPointX = playerTwoStartPoint;
+    this->indicator = new Indicator(this, playerNumber);
 }

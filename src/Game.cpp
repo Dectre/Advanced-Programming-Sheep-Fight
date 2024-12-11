@@ -42,25 +42,27 @@ void Game::updatePollEvents() {
 void Game::updateInput(sf::Event event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::W) {
-            this->testInd->Show();
-            this->testInd->indicatorMove(UP);
+            this->testInd1->Show();
+            this->testInd1->indicatorMove(UP);
         }
         if (event.key.code == sf::Keyboard::S) {
-            this->testInd->Show();
-            this->testInd->indicatorMove(DOWN);
+            this->testInd1->Show();
+            this->testInd1->indicatorMove(DOWN);
         }
         if (event.key.code == sf::Keyboard::Up) {
-            //this->playerTwo.setLinePointer(UP);
+            this->testInd2->Show();
+            this->testInd2->indicatorMove(UP);
         }
         if (event.key.code == sf::Keyboard::Down) {
-            //this->playerTwo.setLinePointer(DOWN);
+            this->testInd2->Show();
+            this->testInd2->indicatorMove(DOWN);
         }
         if (event.key.code == sf::Keyboard::Space) {
-            this->testInd->Hide();
+            this->testInd1->Hide();
             this->playerOneQueue->update(WHITE_PLAYER);
         }
         if (event.key.code == sf::Keyboard::Enter) {
-            this->testInd->Hide();
+            this->testInd2->Hide();
             this->playerTwoQueue->update(BLACK_PLAYER);
         }
     }
@@ -74,12 +76,8 @@ void Game::run() {
     this->lines[0]->addAnimalToTeam2( new BlackGoat() );
     this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
     this->lines[0]->addAnimalToTeam2( new BlackSheep() );
-    this->testInd = new Indicator(1);
-    lineRect.setSize(sf::Vector2f (lineRectWidth,lineRectHeight));
-    lineRect.setFillColor(sf::Color::Transparent);
-    lineRect.setOutlineColor(sf::Color::White);
-    lineRect.setOutlineThickness(3);
-    lineRect.setPosition(lineRectX, lineRectY);
+    this->testInd1 = new Indicator(playerOne , 1);
+    this->testInd2 = new Indicator(playerTwo, 2);
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->update();
@@ -93,7 +91,6 @@ void Game::update() {
     }
     playerOneHealth->updateHealth(playerOne->getHealth());
     playerTwoHealth->updateHealth(playerTwo->getHealth());
-    //this->updateInput();
 
 }
 void Game::render() {
@@ -104,7 +101,8 @@ void Game::render() {
     }
     this->playerOneHealth->render(*this->window);
     this->playerTwoHealth->render(*this->window);
-    this->testInd->render(*this->window);
+    this->testInd1->render(*this->window);
+    this->testInd2->render(*this->window);
     this->playerOneQueue->render(*this->window);
     this->playerTwoQueue->render(*this->window);
 

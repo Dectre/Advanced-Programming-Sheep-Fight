@@ -19,7 +19,7 @@ public:
     void animalIsFighting() { this-> isFighting = true; }
     void update();
     void setTexture(const sf::Texture& texture);
-    sf::Texture getQueueTexture();
+    sf::Texture getQueueTexture() {return this->queueTexture;};
 protected:
     sf::Clock animationClock;
     int numOfAnimations;

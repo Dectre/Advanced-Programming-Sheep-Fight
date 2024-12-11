@@ -75,9 +75,9 @@ const int healthBarXPos=30;
 
 PixelSize lineRectWidth = 815;
 PixelSize lineRectHeight = 85;
-const vector<int> lineDistance = {70, 60, 60};
+const vector<int> lineDistance = {65, 60, 60};
 const int lineRectX = 135;
-const int lineRectY = 100;
+const int lineRectY = 105;
 
 const int pigWidth = 90;
 const int pigHeight = 70;
@@ -92,6 +92,7 @@ const int queueXpos=500;
 const int queueYPos=100;
 const int spaceBetweenQueueBubbles=100;
 
-
+const int playerOneStartPoint = 110;
+const int playerTwoStartPoint = windowWidth - 150;
 
 #endif //SHEEPFIGHT_MANUAL_H

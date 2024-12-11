@@ -1,13 +1,15 @@
 #include "Indicator.h"
+#include "Player.h"
 
-Indicator::Indicator(int team) {
-    this->initVariables();
+Indicator::Indicator(Player* player, int team) {
+    this->initVariables(player);
     this->initTexture();
     this->initSprite(team);
     this->setScale();
 }
 
-void Indicator::initVariables() {
+void Indicator::initVariables(Player* plyr) {
+    this-> player = plyr;
     this->pointTo = -1;
 }
 void Indicator::initTexture() {
@@ -18,11 +20,15 @@ void Indicator::initTexture() {
 }
 
 void Indicator::initSprite(int team) {
-    if (team == 1){
+    if (team == WHITE_PLAYER){
         this->sprite.setTexture(redTexture);
-        this->sprite.setColor(sf::Color(255,0,0,150));}
-    else
+        this->sprite.setColor(sf::Color(255,0,0,100));
+    }
+    else {
         this->sprite.setTexture(blueTexture);
+        this->sprite.setScale(-1, 1);
+        this->sprite.setColor(sf::Color(255, 255, 255, 100));
+    }
 }
 
 void Indicator::setScale() {
@@ -38,7 +44,7 @@ void Indicator::handlePosition() {
     float distance;
     for (int i = 0; i < pointTo; i++)
         distance += lineDistance[i];
-    float x = lineRectX;
+    float x = this->player->getStartPoint();
     float y = lineRectY + pointTo * (lineRectHeight) + distance;
     setPosition(x,y);
 }
