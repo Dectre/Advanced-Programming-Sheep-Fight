@@ -115,4 +115,7 @@ const int bubbleRadiusOffset=15;
 const int playerOneStartPoint = 110;
 const int playerTwoStartPoint = windowWidth - 150;
 
+
+const float animalCooldownDuration = 2;
+
 #endif //SHEEPFIGHT_MANUAL_H

@@ -23,6 +23,7 @@ public:
 
     Animal* getFirstAnimalFromQueue() { return this->queue->getFirstAnimal(); }
     void updateQueue(int playerNumber) { this->queue->update(playerNumber); }
+    float getQueueYpos(){ return this->queueY;}
     void render(sf::RenderTarget& target);
 private:
     void initVariables(int playerNumber);
@@ -31,6 +32,8 @@ private:
     Queue* queue;
     float startPointX;
     float healthBarX;
+    float queueY;
+
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

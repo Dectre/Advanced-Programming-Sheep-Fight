@@ -36,37 +36,43 @@ void Game::movePlayerIndicator(Player *player, Direction dir) {
 
 void Game::updateInput(sf::Event event) {
     if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::Space) {
+            if (this->playerOne->checkIndicatorStatus()) {
+                if (playerOneCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration) {
+                    this->playerOne->hideIndicator();
+                    lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue());
+                    this->playerOne->updateQueue(WHITE_PLAYER);
+                    playerOneCooldownClock.restart();
+                }
+            }
+        }
+
+        if (event.key.code == sf::Keyboard::Enter) {
+            if (this->playerTwo->checkIndicatorStatus()) {
+                if (playerTwoCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration) {
+                    this->playerTwo->hideIndicator();
+                    lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue());
+                    this->playerTwo->updateQueue(BLACK_PLAYER);
+                    playerTwoCooldownClock.restart();
+                }
+            }
+        }
+
         if (event.key.code == sf::Keyboard::W) {
             movePlayerIndicator(playerOne, UP);
         }
         if (event.key.code == sf::Keyboard::S) {
             movePlayerIndicator(playerOne, DOWN);
         }
+
         if (event.key.code == sf::Keyboard::Up) {
             movePlayerIndicator(playerTwo, UP);
         }
         if (event.key.code == sf::Keyboard::Down) {
             movePlayerIndicator(playerTwo, DOWN);
         }
-        if (event.key.code == sf::Keyboard::Space) {
-            if (this->playerOne->checkIndicatorStatus()) {
-                this->playerOne->hideIndicator();
-                lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue(),
-                                                                          playerOne->getIndicatorPointer());
-                this->playerOne->updateQueue(WHITE_PLAYER);
-            }
-        }
-        if (event.key.code == sf::Keyboard::Enter) {
-            if (this->playerTwo->checkIndicatorStatus()) {
-                this->playerTwo->hideIndicator();
-                lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue(),
-                                                                          playerTwo->getIndicatorPointer());
-                this->playerTwo->updateQueue(BLACK_PLAYER);
-            }
-        }
     }
 }
-
 
 void Game::run() {
     while (this->window->isOpen()) {
@@ -107,6 +113,11 @@ Game::Game() {
     this->initBackgroundTexture();
     this->initBackgroundSprite();
     this->initLines();
+    for (int i = 0; i < numOfLines; ++i) {
+        this->lines.push_back(new Line());
+    }
+    playerOneCooldownClock.restart();
+    playerTwoCooldownClock.restart();
 }
 
 Game::~Game() {

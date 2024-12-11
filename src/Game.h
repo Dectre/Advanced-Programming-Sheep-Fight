@@ -12,6 +12,9 @@ private:
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
 
+    sf::Clock playerOneCooldownClock;
+    sf::Clock playerTwoCooldownClock;
+
     Player* playerOne;
     Player* playerTwo;
 
