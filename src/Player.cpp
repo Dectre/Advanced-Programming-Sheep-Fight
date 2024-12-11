@@ -18,4 +18,8 @@ void Player::initVariables(int playerNumber) {
     this->queue = new Queue(playerNumber, this);
 }
 
+void Player::update() {
+    this->health->updateHealthbar();
+}
+
 

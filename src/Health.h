@@ -11,7 +11,7 @@ public:
     void render(sf::RenderTarget &target);
     void updateHealthbar();
     int getHealth() { return health; }
-    void reduceHealth(int damage) { this->health = this->health - damage >= 0 ? this->health - damage : 0; }
+    void reduce(int damage) { this->health = this->health - damage >= 0 ? this->health - damage : 0; }
 
 private:
     int health;

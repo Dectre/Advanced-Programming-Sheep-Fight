@@ -1,9 +1,15 @@
 #include "Line.h"
+#include "Game.h"
+
+Line::Line(Game* g) {
+    this->game = g;
+};
 
 void Line::update() {
     this->updateAnimalsCollision();
     this->moveAnimals();
     this->animalsAnimation();
+    this->checkReachingEndOfTheLine();
 }
 
 void Line::addAnimalToTeam1(Animal* animal, int linePointer) {
@@ -31,6 +37,39 @@ void Line::moveAnimals() {
     for (Animal* animal : team2Animals) {
         animal->move();
     }
+}
+
+bool Line::checkTeamIntersect(vector<Animal*> animals, sf::FloatRect placementZone) {
+    for (Animal* animal : animals) {
+        if (placementZone.intersects(animal->getBounds())) {
+            return false;
+        }
+    }
+}
+
+bool Line::canTeam1AddAnimal(int linePointer) {
+    float y = lineRectY;
+    for (int i = 0; i < linePointer; i++) {
+        y += lineRectHeight + lineDistance[i];
+    }
+    sf::FloatRect placementZone(playerOneStartPoint, y, pigWidth, pigHeight);
+    checkTeamIntersect(team1Animals, placementZone);
+    checkTeamIntersect(team2Animals, placementZone);
+    return true;
+}
+
+bool Line::canTeam2AddAnimal(int linePointer) {
+    float y = lineRectY;
+    for (int i = 0; i < linePointer; i++) {
+        y += lineRectHeight + lineDistance[i];
+    }
+    sf::FloatRect placementZone(playerTwoStartPoint, y,pigWidth, pigHeight);
+    for (Animal* animal : team2Animals) {
+        if (placementZone.intersects(animal->getBounds())) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Line::animalsAnimation() {
@@ -84,7 +123,7 @@ void Line::handleSpeed() {
     int team1Power = getTeamPower(team1Animals);
     int team2Power = getTeamPower(team2Animals);
     Direction fightDirection =  team1Power > team2Power ? RIGHT : LEFT;
-    int fightSpeed = abs(team1Power - team2Power) * defaultSpeed;
+    float fightSpeed = abs(team1Power - team2Power) * pushSpeed;
     for (Animal* animal : team1Animals)
         if (animal->getFightStatus()) {
             animal->setSpeed(fightSpeed);
@@ -113,6 +152,36 @@ void Line::updateAnimalsCollision(){
     }
 }
 
+void Line::team1EndLines() {
+    for (int i = 0 ; i < this->team1Animals.size(); i++) {
+        if (this->team1Animals[i]->getPosition().x < playerOneStartPoint) {
+            delete this->team1Animals[i];
+            this->team1Animals.erase(this->team1Animals.begin() + i);
+        }
+        if (this->team1Animals[i]->getPosition().x > playerTwoStartPoint) {
+            this->game->reduceHealthFromPlayer2(this->team1Animals[i]->getDamage());
+            delete this->team1Animals[i];
+            this->team1Animals.erase(this->team1Animals.begin() + i);
+        }
+    }
+}
+void Line::team2EndLines() {
+    for (int i = 0 ; i < this->team2Animals.size(); i++){
+        if (this->team2Animals[i]->getPosition().x > playerTwoStartPoint){
+            delete this->team2Animals[i];
+            this->team2Animals.erase(this->team2Animals.begin() + i);
+        }
+        if (this->team2Animals[i]->getPosition().x < playerOneStartPoint){
+            this->game->reduceHealthFromPlayer2(this->team2Animals[i]->getDamage());
+            delete this->team2Animals[i];
+            this->team2Animals.erase(this->team2Animals.begin() + i);
+        }
+    }
+}
+void Line::checkReachingEndOfTheLine(){
+    team1EndLines();
+    team2EndLines();
+}
 
 void Line::render(sf::RenderTarget& target) {
     for (Animal* animal : this->team1Animals)

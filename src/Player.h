@@ -12,6 +12,7 @@ public:
 
     int getHealthNumber(){return this->health->getHealth();}
     Health* getHealth() {return this->health; }
+    void reduceHealth(int damage) {this->health->reduce(damage);}
     float getStartPointX() { return this->startPointX;}
     float getHealthBarX() { return this->healthBarX;}
 
@@ -24,6 +25,7 @@ public:
     Animal* getFirstAnimalFromQueue() { return this->queue->getFirstAnimal(); }
     void updateQueue(int playerNumber) { this->queue->update(playerNumber); }
     float getQueueYpos(){ return this->queueY;}
+    void update();
     void render(sf::RenderTarget& target);
 private:
     void initVariables(int playerNumber);

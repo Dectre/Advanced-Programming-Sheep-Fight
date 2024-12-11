@@ -8,7 +8,7 @@ public:
     int getPower() { return this->power; }
     int getDamage() { return this->damage; }
     float getDisplayProbability() { return this->displayProbability; };
-    float getSpeed() { return this->speed; }
+    sf::Vector2f getPosition() { return this->sprite.getPosition();}
     Direction getDirection() { return this->direction; }
     sf::FloatRect getBounds() { return this->sprite.getGlobalBounds(); }
     void changeDirection(Direction newDirection) { this->direction = newDirection; }

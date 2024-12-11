@@ -38,20 +38,23 @@ void Game::updateInput(sf::Event event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::Space) {
             if (this->playerOne->checkIndicatorStatus()) {
-                if (playerOneCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration) {
+                if (playerOneCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration  and
+                    lines[playerOne->getIndicatorPointer()]->canTeam1AddAnimal(playerOne->getIndicatorPointer())) {
                     this->playerOne->hideIndicator();
-                    lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue());
+                    lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue(), playerOne->getIndicatorPointer());
                     this->playerOne->updateQueue(WHITE_PLAYER);
                     playerOneCooldownClock.restart();
                 }
+
             }
         }
 
         if (event.key.code == sf::Keyboard::Enter) {
             if (this->playerTwo->checkIndicatorStatus()) {
-                if (playerTwoCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration) {
+                if (playerTwoCooldownClock.getElapsedTime().asSeconds() >= animalCooldownDuration and
+                lines[playerTwo->getIndicatorPointer()]->canTeam2AddAnimal(playerTwo->getIndicatorPointer())) {
                     this->playerTwo->hideIndicator();
-                    lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue());
+                    lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue(), playerTwo->getIndicatorPointer());
                     this->playerTwo->updateQueue(BLACK_PLAYER);
                     playerTwoCooldownClock.restart();
                 }
@@ -74,6 +77,7 @@ void Game::updateInput(sf::Event event) {
     }
 }
 
+
 void Game::run() {
     while (this->window->isOpen()) {
         this->updatePollEvents();
@@ -86,8 +90,8 @@ void Game::update() {
     for (Line* line: lines) {
         line->update();
     }
-    this->playerOne->getHealth()->updateHealthbar();
-    this->playerTwo->getHealth()->updateHealthbar();
+    this->playerOne->update();
+    this->playerTwo->update();
 
 }
 void Game::render() {
@@ -103,7 +107,7 @@ void Game::render() {
 
 void Game::initLines() {
     for (int i = 0; i < numOfLines; ++i) {
-        this->lines.push_back(new Line());
+        this->lines.push_back(new Line(this));
     }
 }
 Game::Game() {
@@ -114,7 +118,7 @@ Game::Game() {
     this->initBackgroundSprite();
     this->initLines();
     for (int i = 0; i < numOfLines; ++i) {
-        this->lines.push_back(new Line());
+        this->lines.push_back(new Line(this));
     }
     playerOneCooldownClock.restart();
     playerTwoCooldownClock.restart();

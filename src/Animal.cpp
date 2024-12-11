@@ -1,7 +1,7 @@
 #include "Animal.h"
 
 void Animal::move() {
-    this->sprite.move(this->speed * this->direction,0);
+    this->sprite.move(this->speed * this->direction, 0);
 }
 
 void Animal::render(sf::RenderTarget& target) {
@@ -140,7 +140,6 @@ BlackPig::BlackPig() : Animal() {
     this->initTexture();
     this->initSprite();
     this->setScale(pigWidth, pigHeight, 1);
-    this->sprite.setPosition(1080,0);
 }
 
 void BlackPig::initVariables() {
@@ -169,7 +168,6 @@ BlackGoat::BlackGoat() : Animal() {
     this->initTexture();
     this->initSprite();
     this->setScale(goatWidth, goatHeight, 1);
-    this->sprite.setPosition(1080,0);
 }
 
 void BlackGoat::initVariables() {
@@ -208,7 +206,6 @@ void BlackSheep::initVariables() {
     this-> numOfAnimations = numOfBlackSheepMovingAnimations;
     this->numOfStandingAnimations = numOfBlackSheepStandingAnimations;
     this->animationTime = blackSheepAnimationTime;
-    this->sprite.setPosition(1080,0);
 }
 
 void BlackSheep::initTexture() {
