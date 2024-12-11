@@ -2,6 +2,7 @@
 #define SHEEPFIGHT_HEALTH_H
 
 #include "Manual.h"
+#include <SFML/Graphics.hpp>
 
 class Player;
 
@@ -17,6 +18,9 @@ private:
     int health;
     sf::RectangleShape healthLine;
     sf::RectangleShape healthOutline;
+    sf::Font font;
+    sf::Text healthText;
+
     void initHealthLine(float x, float y);
 };
 

@@ -106,9 +106,11 @@ const int sheepWidth = 90;
 const int sheepHeight = 70;
 
 const int queueXpos=400;
+const int queueYpos=20;
 const int animalsQueueBlackPlayerXOffset=10;
-const int animalsQueueWhitePlayerXOffset=85;
-const int animalsQueueYOffset=5;
+const int animalsQueueWhitePlayerXOffset=-165;
+const int bubblesXOffset=-250;
+const int blackPlayerXOffset=220;
 const int whitePlayerqueueYPos=20;
 const int blackPlayerqueueYPos=640;
 const int spaceBetweenQueueBubbles=100;

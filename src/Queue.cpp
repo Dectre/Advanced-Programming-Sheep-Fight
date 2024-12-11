@@ -56,17 +56,16 @@ void Queue::setScale(int playerNumber) {
 void Queue::initPositions(Player *player, int playerNumber) {
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
-        float yPos = player->getQueueYpos();
 
         if (playerNumber == BLACK_PLAYER) {
             xPos = queueXpos + (queueSize - 1 - i) * spaceBetweenQueueBubbles;
         }
         if (playerNumber == WHITE_PLAYER) {
-            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, yPos + animalsQueueYOffset);
-            this->bubbleSprites[i].setPosition(xPos, yPos);
+            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, queueYpos);
+            this->bubbleSprites[i].setPosition(xPos+bubblesXOffset, queueYpos);
         } else {
-            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset, yPos + animalsQueueYOffset);
-            this->bubbleSprites[i].setPosition(xPos, yPos);
+            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset+blackPlayerXOffset, queueYpos);
+            this->bubbleSprites[i].setPosition(xPos+blackPlayerXOffset, queueYpos);
         }
     }
 }
@@ -167,13 +166,12 @@ void Queue::update(int playerNumber) {
         if (playerNumber == BLACK_PLAYER) {
             xPos = queueXpos + (queueSize - 1 - i) * spaceBetweenQueueBubbles;
         }
-
         if (playerNumber == WHITE_PLAYER) {
-            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, yPos + animalsQueueYOffset);
-            this->bubbleSprites[i].setPosition(xPos, yPos);
+            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, queueYpos);
+            this->bubbleSprites[i].setPosition(xPos+bubblesXOffset, queueYpos);
         } else {
-            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset, yPos + animalsQueueYOffset);
-            this->bubbleSprites[i].setPosition(xPos, yPos);
+            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset+blackPlayerXOffset, queueYpos);
+            this->bubbleSprites[i].setPosition(xPos+blackPlayerXOffset, queueYpos);
         }
     }
 }
