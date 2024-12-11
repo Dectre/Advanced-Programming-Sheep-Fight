@@ -14,11 +14,11 @@ private:
     vector<sf::Sprite> bubbleSprites;
     sf::Texture bubbleTexture;
 
-    void initPositions(Player* player);
+    void initPositions(Player* player, int playerNumber);
     void initVariables();
     void generateAnimal(int player, int index);
     int getRandomAnimal();
-    void setScale();
+    void setScale(int playerNumber);
 
 
 public:

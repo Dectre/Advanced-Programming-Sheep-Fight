@@ -23,7 +23,7 @@ void Queue::initVariables() {
 }
 
 
-void Queue::setScale() {
+void Queue::setScale(int playerNumber) {
     for (auto &sprite: queueSprites) {
         if (sprite.getTexture() != nullptr) {
             const sf::Vector2f textureSize(
@@ -32,7 +32,13 @@ void Queue::setScale() {
             );
             float scaleX = queueWidth / textureSize.x;
             float scaleY = queueHeight / textureSize.y;
-            sprite.setScale(scaleX, scaleY);
+
+            // Flip horizontally for WHITE_PLAYER
+            if (playerNumber == WHITE_PLAYER) {
+                sprite.setScale(-scaleX, scaleY);  // Negative scaleX to mirror
+            } else {
+                sprite.setScale(scaleX, scaleY);
+            }
         }
     }
     for (auto &bubble: bubbleSprites) {
@@ -47,14 +53,21 @@ void Queue::setScale() {
 }
 
 
-void Queue::initPositions(Player *player) {
+void Queue::initPositions(Player *player, int playerNumber) {
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
         float yPos = player->getQueueYpos();
 
-        this->queueSprites[i].setPosition(xPos, yPos);
-
-        this->bubbleSprites[i].setPosition(xPos, yPos);
+        if (playerNumber == BLACK_PLAYER) {
+            xPos = queueXpos + (queueSize - 1 - i) * spaceBetweenQueueBubbles;
+        }
+        if (playerNumber == WHITE_PLAYER) {
+            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, yPos + animalsQueueYOffset);
+            this->bubbleSprites[i].setPosition(xPos, yPos);
+        } else {
+            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset, yPos + animalsQueueYOffset);
+            this->bubbleSprites[i].setPosition(xPos, yPos);
+        }
     }
 }
 
@@ -70,8 +83,8 @@ void Queue::initQueue(int playerNumber, Player *player) {
         animalTextures[i] = animalQueue[i]->getQueueTexture();
         queueSprites[i].setTexture(animalTextures[i]);
     }
-    setScale();
-    initPositions(player);
+    setScale(playerNumber);
+    initPositions(player, playerNumber);
 }
 
 int Queue::getRandomAnimal() {
@@ -122,17 +135,13 @@ void Queue::generateAnimal(int playerNumber, int index = 2) {
     queueSprites[index].setTexture(animalTextures[index]);
 }
 
-void Queue::update(int player) {
 
+void Queue::update(int playerNumber) {
     this->animalQueue[0] = animalQueue[1];
     this->animalQueue[1] = animalQueue[2];
-
-
-    generateAnimal(player, 2);
-
+    generateAnimal(playerNumber, 2);
 
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
-
         animalTextures[i] = animalQueue[i]->getQueueTexture();
         queueSprites[i].setTexture(animalTextures[i]);
 
@@ -140,21 +149,32 @@ void Queue::update(int player) {
             const sf::Texture *texture = queueSprites[i].getTexture();
             sf::Vector2u textureSize = texture->getSize();
 
-
             queueSprites[i].setTextureRect(sf::IntRect(0, 0, textureSize.x, textureSize.y));
-
 
             float scaleX = queueWidth / static_cast<float>(textureSize.x);
             float scaleY = queueHeight / static_cast<float>(textureSize.y);
-            queueSprites[i].setScale(scaleX, scaleY);
+
+            if (playerNumber == WHITE_PLAYER) {
+                queueSprites[i].setScale(-scaleX, scaleY);  // Mirror the sprites for the WHITE_PLAYER
+            } else {
+                queueSprites[i].setScale(scaleX, scaleY);
+            }
         }
 
-
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
-        float yPos = (player == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
+        float yPos = (playerNumber == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
 
-        this->queueSprites[i].setPosition(xPos, yPos);
-        this->bubbleSprites[i].setPosition(xPos, yPos);
+        if (playerNumber == BLACK_PLAYER) {
+            xPos = queueXpos + (queueSize - 1 - i) * spaceBetweenQueueBubbles;
+        }
+
+        if (playerNumber == WHITE_PLAYER) {
+            this->queueSprites[i].setPosition(xPos + animalsQueueWhitePlayerXOffset, yPos + animalsQueueYOffset);
+            this->bubbleSprites[i].setPosition(xPos, yPos);
+        } else {
+            this->queueSprites[i].setPosition(xPos + animalsQueueBlackPlayerXOffset, yPos + animalsQueueYOffset);
+            this->bubbleSprites[i].setPosition(xPos, yPos);
+        }
     }
 }
 
