@@ -73,9 +73,9 @@ const int numOfBlackSheepMovingAnimations = 3;
 const int numOfBlackSheepStandingAnimations = 4;
 const int blackSheepAnimationTime = 100;
 
-const int pigDamage = 5;
-const int goatDamage = 10;
-const int sheepDamage = 15;
+const int pigDamage = 3;
+const int goatDamage = 5;
+const int sheepDamage = 8;
 const float defaultSpeed = 1.5;
 const float pushSpeed = 0.5;
 const float pigPower = 1;
