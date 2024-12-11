@@ -10,8 +10,6 @@ public:
     Player(int playerNumber);
     int getHealthNumber(){return this->health->getHealth();}
     Health* getHealth() {return this->health; }
-    void setIndicator(int direction);
-    void initHealthBarX(int playerNumber);
     float getStartPointX() { return this->startPointX;}
     float getHealthBarX() { return this->healthBarX;}
     void showIndicator() { this->indicator->show(); }

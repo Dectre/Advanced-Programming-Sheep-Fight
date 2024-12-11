@@ -70,8 +70,6 @@ void Game::run() {
     this->lines[0]->addAnimalToTeam2( new BlackGoat() );
     this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
     this->lines[0]->addAnimalToTeam2( new BlackSheep() );
-    //this->testInd1 = new Indicator(playerOne , 1);
-    //this->testInd2 = new Indicator(playerTwo, 2);
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->update();
