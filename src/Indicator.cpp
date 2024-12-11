@@ -10,7 +10,7 @@ Indicator::Indicator(Player* player, int team) {
 
 void Indicator::initVariables(Player* plyr) {
     this->player = plyr;
-    this->pointTo = -1;
+    this->pointTo = 0;
 }
 void Indicator::initTexture() {
     if (!this -> redTexture.loadFromFile(TEAM1_POINTER))

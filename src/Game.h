@@ -1,8 +1,6 @@
 #ifndef SHEEPFIGHT_GAME_H
 #define SHEEPFIGHT_GAME_H
 #include "Player.h"
-#include "Health.h"
-#include "Indicator.h"
 #include "Queue.h"
 #include "Line.h"
 
@@ -25,11 +23,13 @@ private:
     void initWindow();
     void initBackgroundTexture();
     void initBackgroundSprite();
+
     void initLines();
     void initQueues();
     void updatePollEvents();
     void updateInput(sf::Event event);
     void update();
+    void movePlayerIndicator(Player* player, Direction dir);
 
 public:
     Game();
@@ -40,7 +40,4 @@ public:
 };
 
 #endif //SHEEPFIGHT_GAME_H
-
-#include "Queue.h"
-
 

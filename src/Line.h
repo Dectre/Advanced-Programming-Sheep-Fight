@@ -9,8 +9,11 @@ public:
     void addAnimalToTeam1(Animal* animal) { this->team1Animals.push_back(animal); }
     void addAnimalToTeam2(Animal* animal) { this->team2Animals.push_back(animal); }
     void moveAnimals();
+    void sortTeams();
+    bool handleTeamCollision(vector<Animal*> animalsTeam, vector<Animal*> enemiesTeam, Animal* animal, size_t index);
     bool checkAnimalCollision(Animal* animal);
     bool checkFrontAnimals();
+    void updateAnimalsCollision();
     void comparePower();
     void incTeam1Power(int pow) { this->team1Power += pow; }
     void incTeam2Power(int pow) { this->team2Power += pow; }

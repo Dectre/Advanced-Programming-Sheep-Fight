@@ -10,6 +10,7 @@
 #include <map>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 using namespace std;
 typedef const int PixelSize;
@@ -45,13 +46,14 @@ Path BLACK_SHEEP_STAND = "sprites/black-sheep/stand.png";
 Path BLACK_SHEEP_QUEUE = "sprites/black-sheep/queue.png";
 
 const int numOfWhitePigMovingAnimations = 4;
+const int numOfWhitePigStandingAnimations = 4;
 const int whitePigAnimationTime = 100;
 const int numOfBlackPigMovingAnimations = 3;
-const int blackPigAnimationTime = 100;
+const int blackPigAnimationTime = 133;
 const int numOfWhiteGoatMovingAnimations = 8;
-const int whiteGoatAnimationTime = 75;
+const int whiteGoatAnimationTime = 66;
 const int numOfBlackGoatMovingAnimations = 8;
-const int blackGoatAnimationTime = 75;
+const int blackGoatAnimationTime = 66;
 const int numOfWhiteSheepMovingAnimations = 3;
 const int whiteSheepAnimationTime = 100;
 const int numOfBlackSheepMovingAnimations = 3;
@@ -59,19 +61,17 @@ const int blackSheepAnimationTime = 100;
 const int pigDamage = 5;
 const int goatDamage = 3;
 const int sheepDamage = 8;
-const float pigSpeed = 1.5;
-const float goatSpeed = 2;
+const float pigSpeed = 2;
+const float goatSpeed = 1.5;
 const float sheepSpeed = 1;
-const int pigPower = 5;
-const int goatPower = 10;
-const int sheepPower = 15;
+const int pigPower = 1;
+const int goatPower = 2;
+const int sheepPower = 3;
 const int pigDisplayProbability = 5;
 const int goatDisplayProbability = 3;
 const int sheepDisplayProbability = 2;
 const int numOfLines = 4;
 const int queueSize=3;
-
-const sf::Vector2f healthBar = {500,500};
 
 PixelSize healthBarHeight=400;
 PixelSize healthBarWidth=20;
@@ -84,7 +84,6 @@ const int healthBarOutlineThickness = 5;
 PixelSize lineRectWidth = 815;
 PixelSize lineRectHeight = 85;
 const vector<int> lineDistance = {65, 60, 60};
-const int lineRectX = 135;
 const int lineRectY = 105;
 
 const int pigWidth = 90;
@@ -106,6 +105,5 @@ const int bubbleRadiusOffset=15;
 
 const int playerOneStartPoint = 110;
 const int playerTwoStartPoint = windowWidth - 150;
-
 
 #endif //SHEEPFIGHT_MANUAL_H

@@ -1,5 +1,5 @@
 #include "Animal.h"
-//ERRORS FOR QUEUE TEXTURES NEED TO BE FIXED
+
 void Animal::move() {
     this->sprite.move(this->speed * this->direction,0);
 }
@@ -15,18 +15,20 @@ void Animal::setScale(PixelSize animalWidth, PixelSize animalHeight, int mirror)
     this->sprite.setScale(mirror * animalWidth / spriteSize.x , animalHeight / spriteSize.y);
 }
 
-
 void Animal::setPosition(const float x, const float y) {
     this->sprite.setPosition(x, y);
 }
 
-void Animal::setTexture(const sf::Texture& texture) {
-    this->sprite.setTexture(texture);
+void Animal::initSprite() {
+    this->defaultTexture = moveTexture;
+    this->sprite.setTexture(this->moveTexture);
+    this->sprite.setTextureRect(handleAnimation());
 }
 
-
-void Animal::initSprite() {
-    this->sprite.setTexture(this->moveTexture);
+void Animal::changeTexture() {
+    this->defaultTexture = standTexture;
+    this->numOfAnimations = 4;
+    this->sprite.setTexture(this->standTexture);
     this->sprite.setTextureRect(handleAnimation());
 }
 
@@ -34,9 +36,8 @@ void Animal::update() {
     this->sprite.setTextureRect(handleAnimation());
 }
 
-
 sf::IntRect Animal::handleAnimation() {
-    const sf::Vector2u textureSize = this->moveTexture.getSize();
+    const sf::Vector2u textureSize = this->defaultTexture.getSize();
     int eachAnimationSize = textureSize.x / this->numOfAnimations;
     sf::Time animationTimeElapsed = animationClock.getElapsedTime();
     if (animationTimeElapsed.asMilliseconds() >= this->animationTime) {
@@ -59,6 +60,7 @@ WhitePig::WhitePig() : Animal() {
 
 void WhitePig::initVariables() {
     this->speed = pigSpeed;
+    this->defaultSpeed = pigSpeed;
     this->direction = RIGHT;
     this->power = pigPower;
     this->damage = pigDamage;
@@ -74,7 +76,7 @@ void WhitePig::initTexture() {
     if (!this -> standTexture.loadFromFile(WHITE_PIG_STAND))
         cerr << "Could not load White Pig standing texture";
     if (!this -> queueTexture.loadFromFile(WHITE_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load White Pig queue texture";
 }
 
 WhiteGoat::WhiteGoat() : Animal() {
@@ -87,6 +89,7 @@ WhiteGoat::WhiteGoat() : Animal() {
 
 void WhiteGoat::initVariables() {
     this->speed = goatSpeed;
+    this->defaultSpeed = goatSpeed;
     this->direction = RIGHT;
     this->power = goatPower;
     this->damage = goatDamage;
@@ -101,7 +104,7 @@ void WhiteGoat::initTexture() {
     if (!this -> standTexture.loadFromFile(WHITE_GOAT_STAND))
         cerr << "Could not load White Goat standing texture";
     if (!this -> queueTexture.loadFromFile(WHITE_GOAT_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load White Goat queue texture";
 }
 
 WhiteSheep::WhiteSheep() : Animal() {
@@ -114,6 +117,7 @@ WhiteSheep::WhiteSheep() : Animal() {
 
 void WhiteSheep::initVariables() {
     this->speed = sheepSpeed;
+    this->defaultSpeed = sheepSpeed;
     this->direction = RIGHT;
     this->power = sheepPower;
     this->damage = sheepDamage;
@@ -128,7 +132,7 @@ void WhiteSheep::initTexture() {
     if (!this -> standTexture.loadFromFile(WHITE_SHEEP_STAND))
         cerr << "Could not load White Sheep standing texture";
     if (!this -> queueTexture.loadFromFile(WHITE_SHEEP_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load White Sheep queue texture";
 }
 
 BlackPig::BlackPig() : Animal() {
@@ -141,6 +145,7 @@ BlackPig::BlackPig() : Animal() {
 
 void BlackPig::initVariables() {
     this->speed = pigSpeed;
+    this->defaultSpeed = pigSpeed;
     this->direction = LEFT;
     this->power = pigPower;
     this->damage = pigDamage;
@@ -155,7 +160,7 @@ void BlackPig::initTexture() {
     if (!this -> standTexture.loadFromFile(BLACK_PIG_STAND))
         cerr << "Could not load Black Pig standing texture";
     if (!this -> queueTexture.loadFromFile(BLACK_PIG_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load Black Pig queue texture";
 
 }
 
@@ -169,6 +174,7 @@ BlackGoat::BlackGoat() : Animal() {
 
 void BlackGoat::initVariables() {
     this->speed = goatSpeed;
+    this->defaultSpeed = goatSpeed;
     this->direction = LEFT;
     this->power = goatPower;
     this->damage = goatDamage;
@@ -183,7 +189,7 @@ void BlackGoat::initTexture() {
     if (!this -> standTexture.loadFromFile(BLACK_GOAT_STAND))
         cerr << "Could not load Black Goat standing texture";
     if (!this -> queueTexture.loadFromFile(BLACK_GOAT_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load Black Goat queue texture";
 }
 
 BlackSheep::BlackSheep() : Animal() {
@@ -196,6 +202,7 @@ BlackSheep::BlackSheep() : Animal() {
 
 void BlackSheep::initVariables() {
     this->speed = sheepSpeed;
+    this->defaultSpeed = sheepSpeed;
     this->direction = LEFT;
     this->power = sheepPower;
     this->damage = sheepDamage;
@@ -211,5 +218,5 @@ void BlackSheep::initTexture() {
     if (!this -> standTexture.loadFromFile(BLACK_SHEEP_STAND))
         cerr << "Could not load Black Sheep standing texture";
     if (!this -> queueTexture.loadFromFile(BLACK_SHEEP_QUEUE))
-        cerr << "Could not load White Pig standing texture";
+        cerr << "Could not load Black Sheep queue texture";
 }

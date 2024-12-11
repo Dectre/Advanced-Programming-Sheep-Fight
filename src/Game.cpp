@@ -19,11 +19,6 @@ void Game::initBackgroundSprite() {
     this->backgroundSprite.setScale(windowWidth / backgroundSizeX, windowHeight/ backgroundSizeY);
 }
 
-void Game::initQueues() {
-    this->playerOneQueue = new Queue(WHITE_PLAYER);
-    this->playerTwoQueue = new Queue(BLACK_PLAYER);
-}
-
 void Game::updatePollEvents() {
     sf::Event event;
     while (this->window->pollEvent(event)) {
@@ -33,34 +28,38 @@ void Game::updatePollEvents() {
     }
 }
 
+void Game::movePlayerIndicator(Player *player, Direction dir) {
+    if (player->checkIndicatorStatus())
+        player->moveIndicator(dir);
+    player->showIndicator();
+}
+
 void Game::updateInput(sf::Event event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::W) {
-            this->playerOne->showIndicator();
-            this->playerOne->moveIndicator(UP);
+            movePlayerIndicator(playerOne, UP);
         }
         if (event.key.code == sf::Keyboard::S) {
-            this->playerOne->showIndicator();
-            this->playerOne->moveIndicator(DOWN);
+            movePlayerIndicator(playerOne, DOWN);
         }
         if (event.key.code == sf::Keyboard::Up) {
-            this->playerTwo->showIndicator();
-            this->playerTwo->moveIndicator(UP);
+            movePlayerIndicator(playerTwo, UP);
         }
         if (event.key.code == sf::Keyboard::Down) {
-            this->playerTwo->showIndicator();
-            this->playerTwo->moveIndicator(DOWN);
+            movePlayerIndicator(playerTwo, DOWN);
         }
         if (event.key.code == sf::Keyboard::Space) {
             if (this->playerOne->checkIndicatorStatus()) {
                 this->playerOne->hideIndicator();
-                this->playerOneQueue->update(WHITE_PLAYER);
+                lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue());
+                this->playerOne->updateQueue(WHITE_PLAYER);
             }
         }
         if (event.key.code == sf::Keyboard::Enter) {
             if (this->playerTwo->checkIndicatorStatus()) {
                 this->playerTwo->hideIndicator();
-                this->playerTwoQueue->update(BLACK_PLAYER);
+                lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue());
+                this->playerTwo->updateQueue(BLACK_PLAYER);
             }
         }
     }
@@ -70,10 +69,10 @@ void Game::updateInput(sf::Event event) {
 void Game::run() {
     this->lines[0]->addAnimalToTeam1(new WhitePig() );
     this->lines[0]->addAnimalToTeam2( new BlackPig() );
-    this->lines[0]->addAnimalToTeam1(new WhiteGoat() );
+    /*this->lines[0]->addAnimalToTeam1(new WhiteGoat() );
     this->lines[0]->addAnimalToTeam2( new BlackGoat() );
     this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
-    this->lines[0]->addAnimalToTeam2( new BlackSheep() );
+    this->lines[0]->addAnimalToTeam2( new BlackSheep() );*/
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->update();
@@ -97,9 +96,6 @@ void Game::render() {
     }
     this->playerOne->render(*this->window);
     this->playerTwo->render(*this->window);
-    this->playerOneQueue->render(*this->window);
-    this->playerTwoQueue->render(*this->window);
-
     this->window->display();
 }
 
@@ -114,7 +110,6 @@ Game::Game() {
     for (int i = 0; i < numOfLines; ++i) {
         this->lines.push_back(new Line());
     }
-    this->initQueues();
 }
 
 Game::~Game() {

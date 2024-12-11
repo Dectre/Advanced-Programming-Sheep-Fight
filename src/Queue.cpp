@@ -34,7 +34,6 @@ void Queue::setScale() {
             sprite.setScale(scaleX, scaleY);
         }
     }
-
     for (auto& bubble : bubbleSprites) {
         const sf::Vector2f bubbleTextureSize(
                 bubbleTexture.getSize().x,
@@ -68,9 +67,9 @@ void Queue::initQueue(int player) {
 
 int Queue::getRandomAnimal() {
     vector<int> animalPool;
-    animalPool.insert(animalPool.end(), pigDisplayProbability, 0); // 5 WhitePigs
-    animalPool.insert(animalPool.end(), goatDisplayProbability, 1); // 3 WhiteGoats
-    animalPool.insert(animalPool.end(), sheepDisplayProbability, 2); // 2 WhiteSheep
+    animalPool.insert(animalPool.end(), pigDisplayProbability, 0);
+    animalPool.insert(animalPool.end(), goatDisplayProbability, 1);
+    animalPool.insert(animalPool.end(), sheepDisplayProbability, 2);
 
     int randomIndex = rand() % animalPool.size();
     return animalPool[randomIndex];
@@ -114,18 +113,16 @@ void Queue::generateAnimal(int player, int index = 2) {
     queueSprites[index].setTexture(animalTextures[index]);
 }
 
-Animal* Queue::getFirstAnimal(){
-    return animalQueue[0];
-}
-
 void Queue::update(int player){
     this->animalQueue[0] = animalQueue[1];
     this->animalQueue[1] = animalQueue[2];
 
     generateAnimal(player, 2);
 
-
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
+        animalTextures[i] = animalQueue[i]->getQueueTexture();
+        queueSprites[i].setTexture(animalTextures[i]);
+        queueSprites[i].setTextureRect(sf::IntRect(0, 0, queueWidth, queueHeight));
         if (player == WHITE_PLAYER) {
             this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, whitePlayerqueueYPos);
         } else if (player == BLACK_PLAYER) {
