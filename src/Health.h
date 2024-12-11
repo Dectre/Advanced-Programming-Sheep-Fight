@@ -3,12 +3,15 @@
 
 #include "Manual.h"
 
+class Player;
+
 class Health {
 public:
-    //HEALTH BARS REDUCING IS NOT FIXED
-    Health(float x, float y);
+    Health(Player* player);
     void render(sf::RenderTarget &target);
-    void updateHealth(int healthValue);
+    void updateHealthbar();
+    int getHealth() { return health; }
+    void reduceHealth(int damage) { this->health = this->health - damage >= 0 ? this->health - damage : 0; }
 
 private:
     int health;

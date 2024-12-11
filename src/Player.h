@@ -2,21 +2,28 @@
 #define SHEEPFIGHT_PLAYER_H
 
 #include "Manual.h"
-#include "Line.h"
 #include "Indicator.h"
+#include "Health.h"
 
 class Player {
 public:
     Player(int playerNumber);
-    int getHealth(){return this->health;}
+    int getHealthNumber(){return this->health->getHealth();}
+    Health* getHealth() {return this->health; }
     void setIndicator(int direction);
-    float getStartPoint() {return this->startPointX;}
+    void initHealthBarX(int playerNumber);
+    float getStartPointX() { return this->startPointX;}
+    float getHealthBarX() { return this->healthBarX;}
+    void showIndicator() { this->indicator->show(); }
+    void hideIndicator() { this->indicator->hide(); }
+    void moveIndicator(Direction dir) {this->indicator->move(dir);}
+    void render(sf::RenderTarget& target);
 private:
-
     void initVariables(int playerNumber);
     Indicator* indicator;
-    int health;
+    Health* health;
     float startPointX;
+    float healthBarX;
 };
 
 #endif //SHEEPFIGHT_PLAYER_H

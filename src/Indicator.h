@@ -10,13 +10,12 @@ public:
     Indicator(Player* player, int team);
     void render(sf::RenderTarget& target);
     void setPosition(const float x, const float y);
-    void indicatorMove(Direction dir){ this->pointTo = (this->pointTo + dir + numOfLines) % numOfLines;}
+    void move(Direction dir){ this->pointTo = (this->pointTo + dir + numOfLines) % numOfLines;}
     int getPoint() {return pointTo;}
     void handlePosition();
-    void Show() { this->isShowing = true;}
-    void Hide() { this->isShowing = false;}
+    void show() { this->isShowing = true;}
+    void hide() { this->isShowing = false;}
 private:
-    Player* player;
     void initVariables(Player* player);
     void initTexture();
     void initSprite(int team);
@@ -25,6 +24,7 @@ private:
     sf::Texture redTexture;
     sf::Texture blueTexture;
     int pointTo;
+    Player* player;
     bool isShowing = false;
 };
 

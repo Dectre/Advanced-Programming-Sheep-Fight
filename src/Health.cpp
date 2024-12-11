@@ -1,25 +1,25 @@
 #include "Health.h"
+#include "Player.h"
 
-Health::Health(float x, float y) : health(100) {
-    this->initHealthLine(x, y);
+Health::Health(Player* player) {
+    this->health = 100;
+    this->initHealthLine(player->getHealthBarX(),HealthBarYPos);
 }
 
 void Health::initHealthLine(float x, float y) {
     this->healthLine.setSize(sf::Vector2f(healthBarWidth, (healthBarHeight * health) / 100));
     this->healthLine.setFillColor(healthBarColor);
     this->healthLine.setOutlineColor(healthBarColor);
-    this->healthLine.setOutlineThickness(0);
     this->healthLine.setPosition(x, y);
     this->healthOutline.setSize(sf::Vector2f(healthBarWidth, healthBarHeight));
     this->healthOutline.setFillColor(sf::Color::Transparent);
     this->healthOutline.setOutlineColor(sf::Color::Black);
-    this->healthOutline.setOutlineThickness(10);
+    this->healthOutline.setOutlineThickness(healthBarOutlineThickness);
     this->healthOutline.setPosition(x, y);
 }
 
-void Health::updateHealth(int healthValue) {
-    this->health = healthValue;
-    healthLine.setSize(sf::Vector2f(healthBarWidth, healthBarHeight*healthValue/100));
+void Health::updateHealthbar() {
+    healthLine.setSize(sf::Vector2f(healthBarWidth, healthBarHeight*this->health/100));
 
 }
 

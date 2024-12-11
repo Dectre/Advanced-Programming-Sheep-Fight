@@ -68,10 +68,16 @@ const int goatDisplayProbability = 3;
 const int sheepDisplayProbability = 2;
 const int numOfLines = 4;
 const int queueSize=3;
-const int healthBarHeight=500;
-const int healthBarWidth=50;
+
+const sf::Vector2f healthBar = {500,500};
+
+PixelSize healthBarHeight=400;
+PixelSize healthBarWidth=20;
 const sf::Color healthBarColor(11, 102, 35);
-const int healthBarXPos=30;
+const int playerOneHealthBarXPos=38;
+const int playerTwoHealthBarXPos= windowWidth - 103;
+const int HealthBarYPos = (windowHeight - healthBarHeight) / 2;
+const int healthBarOutlineThickness = 5;
 
 PixelSize lineRectWidth = 815;
 PixelSize lineRectHeight = 85;

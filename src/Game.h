@@ -11,13 +11,12 @@ class Game {
 private:
 
     sf::RenderWindow* window;
-    Health* playerOneHealth;  // Health bar for left player.
-    Health* playerTwoHealth; // Health bar for right player.
-    Player* playerOne;
-    Player* playerTwo;
-    sf::RectangleShape lineRect;
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
+
+    Player* playerOne;
+    Player* playerTwo;
+
     Queue* playerOneQueue;
     Queue* playerTwoQueue;
     Indicator* testInd1;
@@ -28,7 +27,6 @@ private:
     void initBackgroundTexture();
     void initBackgroundSprite();
     void initLines();
-    void initHealthBars();
     void initQueues();
     void updatePollEvents();
     void updateInput(sf::Event event);

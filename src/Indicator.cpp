@@ -9,7 +9,7 @@ Indicator::Indicator(Player* player, int team) {
 }
 
 void Indicator::initVariables(Player* plyr) {
-    this-> player = plyr;
+    this->player = plyr;
     this->pointTo = -1;
 }
 void Indicator::initTexture() {
@@ -44,7 +44,7 @@ void Indicator::handlePosition() {
     float distance;
     for (int i = 0; i < pointTo; i++)
         distance += lineDistance[i];
-    float x = this->player->getStartPoint();
+    float x = this->player->getStartPointX();
     float y = lineRectY + pointTo * (lineRectHeight) + distance;
     setPosition(x,y);
 }

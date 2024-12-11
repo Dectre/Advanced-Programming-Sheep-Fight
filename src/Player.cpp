@@ -1,14 +1,19 @@
 #include "Player.h"
 
-void Player::setIndicator(int direction) {
-}
 
 Player::Player(int playerNumber) {
     initVariables(playerNumber);
 };
 
-void Player::initVariables(int playerNumber) {
-    if (playerNumber == WHITE_PLAYER) this->startPointX = playerOneStartPoint;
-    else this->startPointX = playerTwoStartPoint;
-    this->indicator = new Indicator(this, playerNumber);
+void Player::render(sf::RenderTarget& target) {
+    this->health->render(target);
+    this->indicator->render(target);
 }
+void Player::initVariables(int playerNumber) {
+    this->startPointX = playerNumber == WHITE_PLAYER ? playerOneStartPoint : playerTwoStartPoint;
+    this->healthBarX = playerNumber == WHITE_PLAYER ? playerOneHealthBarXPos : playerTwoHealthBarXPos;
+    this->indicator = new Indicator(this, playerNumber);
+    this->health = new Health(this);
+}
+
+
