@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 typedef const int PixelSize;
