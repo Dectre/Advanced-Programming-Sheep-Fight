@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/SheepFight.iml" filepath="$PROJECT_DIR$/.idea/SheepFight.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/SF_CLION.iml" filepath="$PROJECT_DIR$/.idea/SF_CLION.iml" />
+>>>>>>> 2c2fe16 (MakeFile Fixed.)
     </modules>
   </component>
 </project>
