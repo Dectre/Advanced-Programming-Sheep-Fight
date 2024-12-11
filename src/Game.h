@@ -15,9 +15,6 @@ private:
     Player* playerOne;
     Player* playerTwo;
 
-    Queue* playerOneQueue;
-    Queue* playerTwoQueue;
-
     vector<Line*> lines;
 
     void initWindow();
@@ -25,7 +22,6 @@ private:
     void initBackgroundSprite();
 
     void initLines();
-    void initQueues();
     void updatePollEvents();
     void updateInput(sf::Event event);
     void update();

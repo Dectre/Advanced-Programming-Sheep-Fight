@@ -23,7 +23,6 @@ public:
     void animalIsFighting() { this-> isFighting = true; }
     bool getFightStatus() { return isFighting; }
     void update();
-    float getDefaultSpeed() { return defaultSpeed; }
     void setTexture(const sf::Texture& texture);
     sf::Texture getQueueTexture() {return this->queueTexture;};
 protected:
@@ -38,7 +37,6 @@ protected:
     sf::Texture queueTexture;
     sf::Texture defaultTexture;
     float speed;
-    float defaultSpeed;
     Direction direction;
     float power;
     int damage;

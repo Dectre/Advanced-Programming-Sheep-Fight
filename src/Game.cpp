@@ -51,14 +51,16 @@ void Game::updateInput(sf::Event event) {
         if (event.key.code == sf::Keyboard::Space) {
             if (this->playerOne->checkIndicatorStatus()) {
                 this->playerOne->hideIndicator();
-                lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue());
+                lines[playerOne->getIndicatorPointer()]->addAnimalToTeam1(this->playerOne->getFirstAnimalFromQueue(),
+                                                                          playerOne->getIndicatorPointer());
                 this->playerOne->updateQueue(WHITE_PLAYER);
             }
         }
         if (event.key.code == sf::Keyboard::Enter) {
             if (this->playerTwo->checkIndicatorStatus()) {
                 this->playerTwo->hideIndicator();
-                lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue());
+                lines[playerTwo->getIndicatorPointer()]->addAnimalToTeam2(this->playerTwo->getFirstAnimalFromQueue(),
+                                                                          playerTwo->getIndicatorPointer());
                 this->playerTwo->updateQueue(BLACK_PLAYER);
             }
         }
@@ -67,12 +69,6 @@ void Game::updateInput(sf::Event event) {
 
 
 void Game::run() {
-    this->lines[0]->addAnimalToTeam1(new WhitePig() );
-    this->lines[0]->addAnimalToTeam2( new BlackPig() );
-    /*this->lines[0]->addAnimalToTeam1(new WhiteGoat() );
-    this->lines[0]->addAnimalToTeam2( new BlackGoat() );
-    this->lines[0]->addAnimalToTeam1(new WhiteSheep() );
-    this->lines[0]->addAnimalToTeam2( new BlackSheep() );*/
     while (this->window->isOpen()) {
         this->updatePollEvents();
         this->update();
@@ -99,17 +95,18 @@ void Game::render() {
     this->window->display();
 }
 
-
-
+void Game::initLines() {
+    for (int i = 0; i < numOfLines; ++i) {
+        this->lines.push_back(new Line());
+    }
+}
 Game::Game() {
     this->playerOne = new Player(1);
     this->playerTwo = new Player(2);
     this->initWindow();
     this->initBackgroundTexture();
     this->initBackgroundSprite();
-    for (int i = 0; i < numOfLines; ++i) {
-        this->lines.push_back(new Line());
-    }
+    this->initLines();
 }
 
 Game::~Game() {

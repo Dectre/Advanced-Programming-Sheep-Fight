@@ -6,31 +6,25 @@
 
 class Line {
 public:
-    void addAnimalToTeam1(Animal* animal) { this->team1Animals.push_back(animal); }
-    void addAnimalToTeam2(Animal* animal) { this->team2Animals.push_back(animal); }
+    void addAnimalToTeam1(Animal* animal, int linePointer);
+    void addAnimalToTeam2(Animal* animal, int linePointer);
     void moveAnimals();
     void sortTeams();
     bool handleTeamCollision(vector<Animal*> animalsTeam, vector<Animal*> enemiesTeam, Animal* animal, size_t index);
     bool checkAnimalCollision(Animal* animal);
+    void setPosition(int pointer);
     bool checkFrontAnimals();
     void updateAnimalsCollision();
-    void comparePower();
-    void incTeam1Power(int pow) { this->team1Power += pow; }
-    void incTeam2Power(int pow) { this->team2Power += pow; }
     void handleSpeed();
     void handleFight();
-    int getTeam1Power();
-    int getTeam2Power();
+    int getTeamPower(vector<Animal*> animals);
     void checkReachingEndOfTheLine();
     void animalsAnimation();
     void update();
     void render(sf::RenderTarget& target);
 private:
-    map<string, float> position;
     vector<Animal*> team1Animals;
     vector<Animal*> team2Animals;
-    int team1Power;
-    int team2Power;
 };
 
 

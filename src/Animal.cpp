@@ -59,8 +59,7 @@ WhitePig::WhitePig() : Animal() {
 }
 
 void WhitePig::initVariables() {
-    this->speed = pigSpeed;
-    this->defaultSpeed = pigSpeed;
+    this->speed = defaultSpeed;
     this->direction = RIGHT;
     this->power = pigPower;
     this->damage = pigDamage;
@@ -89,8 +88,7 @@ WhiteGoat::WhiteGoat() : Animal() {
 }
 
 void WhiteGoat::initVariables() {
-    this->speed = goatSpeed;
-    this->defaultSpeed = goatSpeed;
+    this->speed = defaultSpeed;
     this->direction = RIGHT;
     this->power = goatPower;
     this->damage = goatDamage;
@@ -118,8 +116,7 @@ WhiteSheep::WhiteSheep() : Animal() {
 }
 
 void WhiteSheep::initVariables() {
-    this->speed = sheepSpeed;
-    this->defaultSpeed = sheepSpeed;
+    this->speed = defaultSpeed;
     this->direction = RIGHT;
     this->power = sheepPower;
     this->damage = sheepDamage;
@@ -147,8 +144,7 @@ BlackPig::BlackPig() : Animal() {
 }
 
 void BlackPig::initVariables() {
-    this->speed = pigSpeed;
-    this->defaultSpeed = pigSpeed;
+    this->speed = defaultSpeed;
     this->direction = LEFT;
     this->power = pigPower;
     this->damage = pigDamage;
@@ -177,8 +173,7 @@ BlackGoat::BlackGoat() : Animal() {
 }
 
 void BlackGoat::initVariables() {
-    this->speed = goatSpeed;
-    this->defaultSpeed = goatSpeed;
+    this->speed = defaultSpeed;
     this->direction = LEFT;
     this->power = goatPower;
     this->damage = goatDamage;
@@ -205,8 +200,7 @@ BlackSheep::BlackSheep() : Animal() {
 }
 
 void BlackSheep::initVariables() {
-    this->speed = sheepSpeed;
-    this->defaultSpeed = sheepSpeed;
+    this->speed = defaultSpeed;
     this->direction = LEFT;
     this->power = sheepPower;
     this->damage = sheepDamage;

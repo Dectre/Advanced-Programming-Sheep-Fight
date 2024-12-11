@@ -1,15 +1,29 @@
 #include "Line.h"
 
-
 void Line::update() {
     this->updateAnimalsCollision();
     this->moveAnimals();
     this->animalsAnimation();
 }
 
-void Line::sortTeams() {
-
+void Line::addAnimalToTeam1(Animal* animal, int linePointer) {
+    this->team1Animals.push_back(animal);
+    float y = (lineRectY);
+    for (int i = 0; i < linePointer; i++) {
+        y += lineRectHeight + lineDistance[i];
+    }
+    animal->setPosition(playerOneStartPoint,y);
 }
+
+void Line::addAnimalToTeam2(Animal* animal, int linePointer) {
+    this->team2Animals.push_back(animal);
+    float y = (lineRectY);
+    for (int i = 0; i < linePointer; i++) {
+        y += lineRectHeight + lineDistance[i];
+    }
+    animal->setPosition(playerTwoStartPoint,y);
+}
+
 void Line::moveAnimals() {
     for (Animal* animal : team1Animals) {
         animal->move();
@@ -28,7 +42,6 @@ void Line::animalsAnimation() {
 
     }
 }
-
 
 bool Line::handleTeamCollision(vector<Animal*> animalsTeam, vector<Animal*> enemiesTeam, Animal* animal, size_t index) {
     sf::FloatRect animalBounds = animal->getBounds();
@@ -59,22 +72,19 @@ bool Line::checkAnimalCollision(Animal* animal) {
     }
 }
 
+int Line::getTeamPower(vector<Animal*> animals) {
+    int sum = 0;
+    for (Animal* animal : animals)
+        if (animal->getFightStatus()) {
+            sum += animal->getPower();
+        }
+    return sum;
+}
 void Line::handleSpeed() {
-    int sumOfTeam1Speeds = 0; int sumOfTeam1Power = 0; int sumOfTeam2Power = 0; int sumOfTeam2Speeds = 0;
-    for (Animal* animal : team1Animals)
-        if (animal->getFightStatus()) {
-            sumOfTeam1Speeds += animal->getDefaultSpeed() * RIGHT;
-            sumOfTeam1Power += animal->getPower();
-        }
-    for (Animal* animal : team2Animals)
-        if (animal->getFightStatus()) {
-            sumOfTeam2Speeds += animal->getDefaultSpeed() * LEFT;
-            sumOfTeam2Power += animal->getPower();
-        }
-    int fightSpeed = sumOfTeam1Speeds + sumOfTeam2Speeds;
-    cout << fightSpeed << endl;
-    Direction fightDirection =  sumOfTeam1Power > sumOfTeam2Power ? RIGHT : LEFT;
-    fightSpeed = abs(fightSpeed);
+    int team1Power = getTeamPower(team1Animals);
+    int team2Power = getTeamPower(team2Animals);
+    Direction fightDirection =  team1Power > team2Power ? RIGHT : LEFT;
+    int fightSpeed = abs(team1Power - team2Power) * defaultSpeed;
     for (Animal* animal : team1Animals)
         if (animal->getFightStatus()) {
             animal->setSpeed(fightSpeed);
@@ -103,9 +113,11 @@ void Line::updateAnimalsCollision(){
     }
 }
 
+
 void Line::render(sf::RenderTarget& target) {
     for (Animal* animal : this->team1Animals)
         animal->render(target);
     for (Animal* animal : this->team2Animals)
         animal->render(target);
 }
+
