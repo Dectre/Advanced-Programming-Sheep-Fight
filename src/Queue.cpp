@@ -1,8 +1,9 @@
 #include "Queue.h"
+#include "Player.h"
 
-Queue::Queue(int player) {
+Queue::Queue(int playerNumber, Player* player) {
     initVariables();
-    initQueue(player);
+    initQueue(playerNumber, player);
 };
 
 void Queue::initVariables() {
@@ -46,21 +47,21 @@ void Queue::setScale() {
 }
 
 
-void Queue::initPositions(int player) {
+void Queue::initPositions(Player* player) {
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
-        float yPos = (player == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
+        float yPos = player->getQueueYpos();
 
         this->queueSprites[i].setPosition(xPos, yPos);
 
         this->bubbleSprites[i].setPosition(xPos, yPos);
     }
 }
-void Queue::initQueue(int player) {
+void Queue::initQueue(int playerNumber, Player* player) {
     animalTextures.resize(queueSize);
-    generateAnimal(player, 0);
-    generateAnimal(player, 1);
-    generateAnimal(player, 2);
+    generateAnimal(playerNumber, 0);
+    generateAnimal(playerNumber, 1);
+    generateAnimal(playerNumber, 2);
     setScale();
     initPositions(player);
 }
@@ -75,9 +76,9 @@ int Queue::getRandomAnimal() {
     return animalPool[randomIndex];
 }
 
-void Queue::generateAnimal(int player, int index = 2) {
+void Queue::generateAnimal(int playerNumber, int index = 2) {
     int animalType = getRandomAnimal();
-    if (player == WHITE_PLAYER) {
+    if (playerNumber == WHITE_PLAYER) {
         switch (animalType) {
             case 0: {
                 this->animalQueue[index] = new WhitePig();
@@ -93,7 +94,7 @@ void Queue::generateAnimal(int player, int index = 2) {
             }
         }
     }
-    if (player == BLACK_PLAYER) {
+    if (playerNumber == BLACK_PLAYER) {
         switch (animalType) {
             case 0: {
                 this->animalQueue[index] = new BlackPig();
@@ -113,23 +114,43 @@ void Queue::generateAnimal(int player, int index = 2) {
     queueSprites[index].setTexture(animalTextures[index]);
 }
 
-void Queue::update(int player){
+void Queue::update(int player) {
+    // Shift animals in the queue
     this->animalQueue[0] = animalQueue[1];
     this->animalQueue[1] = animalQueue[2];
 
+    // Generate a new animal for the last position
     generateAnimal(player, 2);
 
+    // Update textures, scales, and positions
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
+        // Update texture for the sprite
         animalTextures[i] = animalQueue[i]->getQueueTexture();
         queueSprites[i].setTexture(animalTextures[i]);
-        queueSprites[i].setTextureRect(sf::IntRect(0, 0, queueWidth, queueHeight));
-        if (player == WHITE_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, whitePlayerqueueYPos);
-        } else if (player == BLACK_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, blackPlayerqueueYPos);
+
+        // Ensure the texture rectangle is set to the full size of the texture
+        if (queueSprites[i].getTexture() != nullptr) {
+            const sf::Texture* texture = queueSprites[i].getTexture();
+            sf::Vector2u textureSize = texture->getSize();
+
+            // Reset the texture rectangle to the full size of the texture
+            queueSprites[i].setTextureRect(sf::IntRect(0, 0, textureSize.x, textureSize.y));
+
+            // Calculate the scale to fit the queue dimensions
+            float scaleX = queueWidth / static_cast<float>(textureSize.x);
+            float scaleY = queueHeight / static_cast<float>(textureSize.y);
+            queueSprites[i].setScale(scaleX, scaleY);
         }
+
+        // Update the position of each sprite and bubble
+        float xPos = queueXpos + i * spaceBetweenQueueBubbles;
+        float yPos = (player == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
+
+        this->queueSprites[i].setPosition(xPos, yPos);
+        this->bubbleSprites[i].setPosition(xPos, yPos);
     }
 }
+
 
 
 void Queue::render(sf::RenderTarget& target) {

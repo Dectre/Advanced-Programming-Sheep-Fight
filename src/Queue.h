@@ -2,27 +2,27 @@
 #define SHEEPFIGHT_QUEUE_H
 
 #include "Animal.h"
+class Player;
 
 class Queue {
 private:
     vector<sf::Texture> animalTextures;
     vector<Animal*> animalQueue;
 
-    void initQueue(int player);
+    void initQueue(int playerNumber, Player* player);
     vector<sf::Sprite> queueSprites;
     vector<sf::Sprite> bubbleSprites;
     sf::Texture bubbleTexture;
 
-    void initPositions(int player);
+    void initPositions(Player* player);
     void initVariables();
     void generateAnimal(int player, int index);
-    sf::Sprite* handleSprite(int player);
     int getRandomAnimal();
     void setScale();
 
 
 public:
-    Queue(int player);
+    Queue(int playerNumber, Player* player);
     ~Queue();
     void render(sf::RenderTarget& target);
     void update(int player);
