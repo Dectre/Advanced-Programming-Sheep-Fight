@@ -19,8 +19,7 @@ private:
 
     Queue* playerOneQueue;
     Queue* playerTwoQueue;
-    Indicator* testInd1;
-    Indicator* testInd2;
+
     vector<Line*> lines;
 
     void initWindow();

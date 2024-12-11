@@ -4,6 +4,7 @@
 #include "Manual.h"
 #include "Indicator.h"
 #include "Health.h"
+#include "Queue.h"
 
 class Player {
 public:
@@ -14,12 +15,15 @@ public:
     float getHealthBarX() { return this->healthBarX;}
     void showIndicator() { this->indicator->show(); }
     void hideIndicator() { this->indicator->hide(); }
+    bool checkIndicatorStatus() {return this->indicator->getStatus(); }
     void moveIndicator(Direction dir) {this->indicator->move(dir);}
     void render(sf::RenderTarget& target);
+    Animal* getAnimal();
 private:
     void initVariables(int playerNumber);
     Indicator* indicator;
     Health* health;
+    //Queue* queue;
     float startPointX;
     float healthBarX;
 };

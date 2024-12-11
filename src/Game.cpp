@@ -52,12 +52,16 @@ void Game::updateInput(sf::Event event) {
             this->playerTwo->moveIndicator(DOWN);
         }
         if (event.key.code == sf::Keyboard::Space) {
-            this->playerOne->hideIndicator();
-            this->playerOneQueue->update(WHITE_PLAYER);
+            if (this->playerOne->checkIndicatorStatus()) {
+                this->playerOne->hideIndicator();
+                this->playerOneQueue->update(WHITE_PLAYER);
+            }
         }
         if (event.key.code == sf::Keyboard::Enter) {
-            this->playerTwo->hideIndicator();
-            this->playerTwoQueue->update(BLACK_PLAYER);
+            if (this->playerTwo->checkIndicatorStatus()) {
+                this->playerTwo->hideIndicator();
+                this->playerTwoQueue->update(BLACK_PLAYER);
+            }
         }
     }
 }

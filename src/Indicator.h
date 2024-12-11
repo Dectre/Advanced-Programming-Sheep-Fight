@@ -15,6 +15,7 @@ public:
     void handlePosition();
     void show() { this->isShowing = true;}
     void hide() { this->isShowing = false;}
+    bool getStatus() { return isShowing; }
 private:
     void initVariables(Player* player);
     void initTexture();
