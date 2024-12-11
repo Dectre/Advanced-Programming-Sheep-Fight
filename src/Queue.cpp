@@ -6,20 +6,55 @@ Queue::Queue(int player) {
 };
 
 void Queue::initVariables() {
-    for (int i = 0; i < queueSize ; i++){
-        this->animalQueue.push_back(new Animal());
-        this->queueSprites.push_back(*new sf::Sprite());
+    if (!bubbleTexture.loadFromFile("sprites/queue-bubble.png")) {
+        std::cerr << "Error: Could not load bubble texture.\n";
+        return;
+    }
 
+    for (int i = 0; i < queueSize; ++i) {
+        this->animalQueue.push_back(new Animal());
+        this->queueSprites.push_back(sf::Sprite());
+
+        sf::Sprite bubbleSprite;
+        bubbleSprite.setTexture(bubbleTexture);
+        bubbleSprites.push_back(bubbleSprite);
     }
 }
 
-void Queue::initPositions(int player){
-    for (size_t i = 0; i < this->queueSprites.size(); ++i) {
-        if (player == WHITE_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, queueYPos);
-        } else if (player == BLACK_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, windowHeight - queueYPos);
+
+void Queue::setScale() {
+    for (auto& sprite : queueSprites) {
+        if (sprite.getTexture() != nullptr) {
+            const sf::Vector2f textureSize(
+                    sprite.getTexture()->getSize().x,
+                    sprite.getTexture()->getSize().y
+            );
+            float scaleX = queueWidth / textureSize.x;
+            float scaleY = queueHeight / textureSize.y;
+            sprite.setScale(scaleX, scaleY);
         }
+    }
+
+    for (auto& bubble : bubbleSprites) {
+        const sf::Vector2f bubbleTextureSize(
+                bubbleTexture.getSize().x,
+                bubbleTexture.getSize().y
+        );
+        float scaleX = (queueWidth+bubbleRadiusOffset) / bubbleTextureSize.x;
+        float scaleY = (queueHeight+bubbleRadiusOffset) / bubbleTextureSize.y;
+        bubble.setScale(scaleX, scaleY);
+    }
+}
+
+
+void Queue::initPositions(int player) {
+    for (size_t i = 0; i < this->queueSprites.size(); ++i) {
+        float xPos = queueXpos + i * spaceBetweenQueueBubbles;
+        float yPos = (player == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
+
+        this->queueSprites[i].setPosition(xPos, yPos);
+
+        this->bubbleSprites[i].setPosition(xPos, yPos);
     }
 }
 void Queue::initQueue(int player) {
@@ -27,6 +62,7 @@ void Queue::initQueue(int player) {
     generateAnimal(player, 0);
     generateAnimal(player, 1);
     generateAnimal(player, 2);
+    setScale();
     initPositions(player);
 }
 
@@ -82,10 +118,6 @@ Animal* Queue::getFirstAnimal(){
     return animalQueue[0];
 }
 
-sf::Sprite* handleSprite(int player) {
-    sf::Sprite* sprite = new sf::Sprite();
-}
-
 void Queue::update(int player){
     this->animalQueue[0] = animalQueue[1];
     this->animalQueue[1] = animalQueue[2];
@@ -95,19 +127,24 @@ void Queue::update(int player){
 
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
         if (player == WHITE_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, queueYPos);
+            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, whitePlayerqueueYPos);
         } else if (player == BLACK_PLAYER) {
-            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, windowHeight - queueYPos);
+            this->queueSprites[i].setPosition(queueXpos + i * spaceBetweenQueueBubbles, blackPlayerqueueYPos);
         }
     }
 }
 
 
 void Queue::render(sf::RenderTarget& target) {
-    for (auto sprite : this->queueSprites) {
+    for (const auto& bubble : this->bubbleSprites) {
+        target.draw(bubble);
+    }
+
+    for (const auto& sprite : this->queueSprites) {
         target.draw(sprite);
     }
 }
+
 
 Queue::~Queue() {
     for (auto& animal : this->animalQueue) {
