@@ -23,19 +23,28 @@ private:
     void initWindow();
     void initBackgroundTexture();
     void initBackgroundSprite();
-
+    void initEndGameTexts();
     void initLines();
+    void initMusic();
 
     void updatePollEvents();
     void updateInput(sf::Event event);
     void update();
     void movePlayerIndicator(Player* player, Direction dir);
-    void CheckWin();
+
 
 public:
     Game();
     ~Game();
 
+    sf::Font font;
+    bool player1WonGame;
+    bool player2WonGame;
+
+    sf::Music gameMusic;
+
+    sf::Text player1WinMessage;
+    sf::Text player2WinMessage;
 
     void run();
     void render();

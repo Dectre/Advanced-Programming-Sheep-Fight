@@ -172,7 +172,7 @@ void Line::team2EndLines() {
             this->team2Animals.erase(this->team2Animals.begin() + i);
         }
         if (this->team2Animals[i]->getPosition().x < playerOneStartPoint){
-            this->game->reduceHealthFromPlayer2(this->team2Animals[i]->getDamage());
+            this->game->reduceHealthFromPlayer1(this->team2Animals[i]->getDamage());
             delete this->team2Animals[i];
             this->team2Animals.erase(this->team2Animals.begin() + i);
         }

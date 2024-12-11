@@ -28,4 +28,5 @@ target_link_libraries(SheepFight
         sfml-graphics
         sfml-window
         sfml-system
+        sfml-audio
 )

@@ -15,6 +15,7 @@
 using namespace std;
 typedef const int PixelSize;
 typedef const string Path;
+typedef const string Message;
 
 PixelSize windowWidth = 1080;
 PixelSize windowHeight = 720;
@@ -44,6 +45,9 @@ Path WHITE_SHEEP_QUEUE = "sprites/white-sheep/queue.png";
 Path BLACK_SHEEP_MOVE = "sprites/black-sheep/move.png";
 Path BLACK_SHEEP_STAND = "sprites/black-sheep/stand.png";
 Path BLACK_SHEEP_QUEUE = "sprites/black-sheep/queue.png";
+Path FONT1 = "fonts/font.ttf";
+Path FONT2 = "fonts/SPACEBOY.TTF";
+Path MUSIC = "musics/Piremard.ogg";
 
 const int numOfWhitePigMovingAnimations = 4;
 const int numOfWhitePigStandingAnimations = 4;
@@ -70,16 +74,16 @@ const int numOfBlackSheepStandingAnimations = 4;
 const int blackSheepAnimationTime = 100;
 
 const int pigDamage = 5;
-const int goatDamage = 3;
-const int sheepDamage = 8;
+const int goatDamage = 10;
+const int sheepDamage = 15;
 const float defaultSpeed = 1.5;
 const float pushSpeed = 0.5;
 const float pigPower = 1;
 const float goatPower = 2;
 const float sheepPower = 3;
 const int pigDisplayProbability = 5;
-const int goatDisplayProbability = 3;
-const int sheepDisplayProbability = 2;
+const int goatDisplayProbability = 4;
+const int sheepDisplayProbability = 3;
 const int numOfLines = 4;
 const int queueSize=3;
 
@@ -121,7 +125,11 @@ const int bubbleRadiusOffset=15;
 const int playerOneStartPoint = 110;
 const int playerTwoStartPoint = windowWidth - 150;
 
+const float animalCooldownDuration = 1000;
 
-const float animalCooldownDuration = 2;
+Message player1WinText = "Whites Win!";
+Message player2WinText = "Blacks Win!";
+
+
 
 #endif //SHEEPFIGHT_MANUAL_H
