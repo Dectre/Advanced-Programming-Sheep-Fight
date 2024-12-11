@@ -1,7 +1,7 @@
 #include "Queue.h"
 #include "Player.h"
 
-Queue::Queue(int playerNumber, Player* player) {
+Queue::Queue(int playerNumber, Player *player) {
     initVariables();
     initQueue(playerNumber, player);
 };
@@ -24,7 +24,7 @@ void Queue::initVariables() {
 
 
 void Queue::setScale() {
-    for (auto& sprite : queueSprites) {
+    for (auto &sprite: queueSprites) {
         if (sprite.getTexture() != nullptr) {
             const sf::Vector2f textureSize(
                     sprite.getTexture()->getSize().x,
@@ -35,19 +35,19 @@ void Queue::setScale() {
             sprite.setScale(scaleX, scaleY);
         }
     }
-    for (auto& bubble : bubbleSprites) {
+    for (auto &bubble: bubbleSprites) {
         const sf::Vector2f bubbleTextureSize(
                 bubbleTexture.getSize().x,
                 bubbleTexture.getSize().y
         );
-        float scaleX = (queueWidth+bubbleRadiusOffset) / bubbleTextureSize.x;
-        float scaleY = (queueHeight+bubbleRadiusOffset) / bubbleTextureSize.y;
+        float scaleX = (queueWidth + bubbleRadiusOffset) / bubbleTextureSize.x;
+        float scaleY = (queueHeight + bubbleRadiusOffset) / bubbleTextureSize.y;
         bubble.setScale(scaleX, scaleY);
     }
 }
 
 
-void Queue::initPositions(Player* player) {
+void Queue::initPositions(Player *player) {
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
         float yPos = player->getQueueYpos();
@@ -57,11 +57,19 @@ void Queue::initPositions(Player* player) {
         this->bubbleSprites[i].setPosition(xPos, yPos);
     }
 }
-void Queue::initQueue(int playerNumber, Player* player) {
+
+
+void Queue::initQueue(int playerNumber, Player *player) {
     animalTextures.resize(queueSize);
-    generateAnimal(playerNumber, 0);
-    generateAnimal(playerNumber, 1);
-    generateAnimal(playerNumber, 2);
+    for (int i = 0; i < queueSize; i++) {
+        if (playerNumber == WHITE_PLAYER) {
+            this->animalQueue[i] = new WhitePig();
+        } else {
+            this->animalQueue[i] = new BlackPig();
+        }
+        animalTextures[i] = animalQueue[i]->getQueueTexture();
+        queueSprites[i].setTexture(animalTextures[i]);
+    }
     setScale();
     initPositions(player);
 }
@@ -115,34 +123,33 @@ void Queue::generateAnimal(int playerNumber, int index = 2) {
 }
 
 void Queue::update(int player) {
-    // Shift animals in the queue
+
     this->animalQueue[0] = animalQueue[1];
     this->animalQueue[1] = animalQueue[2];
 
-    // Generate a new animal for the last position
+
     generateAnimal(player, 2);
 
-    // Update textures, scales, and positions
+
     for (size_t i = 0; i < this->queueSprites.size(); ++i) {
-        // Update texture for the sprite
+
         animalTextures[i] = animalQueue[i]->getQueueTexture();
         queueSprites[i].setTexture(animalTextures[i]);
 
-        // Ensure the texture rectangle is set to the full size of the texture
         if (queueSprites[i].getTexture() != nullptr) {
-            const sf::Texture* texture = queueSprites[i].getTexture();
+            const sf::Texture *texture = queueSprites[i].getTexture();
             sf::Vector2u textureSize = texture->getSize();
 
-            // Reset the texture rectangle to the full size of the texture
+
             queueSprites[i].setTextureRect(sf::IntRect(0, 0, textureSize.x, textureSize.y));
 
-            // Calculate the scale to fit the queue dimensions
+
             float scaleX = queueWidth / static_cast<float>(textureSize.x);
             float scaleY = queueHeight / static_cast<float>(textureSize.y);
             queueSprites[i].setScale(scaleX, scaleY);
         }
 
-        // Update the position of each sprite and bubble
+
         float xPos = queueXpos + i * spaceBetweenQueueBubbles;
         float yPos = (player == WHITE_PLAYER) ? whitePlayerqueueYPos : blackPlayerqueueYPos;
 
@@ -152,20 +159,19 @@ void Queue::update(int player) {
 }
 
 
-
-void Queue::render(sf::RenderTarget& target) {
-    for (const auto& bubble : this->bubbleSprites) {
+void Queue::render(sf::RenderTarget &target) {
+    for (const auto &bubble: this->bubbleSprites) {
         target.draw(bubble);
     }
 
-    for (const auto& sprite : this->queueSprites) {
+    for (const auto &sprite: this->queueSprites) {
         target.draw(sprite);
     }
 }
 
 
 Queue::~Queue() {
-    for (auto& animal : this->animalQueue) {
+    for (auto &animal: this->animalQueue) {
         delete animal;
     }
 };
