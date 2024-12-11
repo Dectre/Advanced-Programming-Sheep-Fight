@@ -3,21 +3,22 @@
 
 #include "Animal.h"
 #include "Player.h"
-#include <map>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
 
 class Queue {
 private:
+    vector<sf::Texture> animalTextures;
     vector<Animal*> animalQueue;
-    map<string, sf::Texture> animalTextures;
-    sf::Sprite sprite;
-
-    void initQueue(int player);
-    Animal* generateAnimal(int player);
     vector<sf::Sprite> queueSprites;
 
+    void initPositions(int player);
+    void initVariables();
+    void initQueue(int player);
+    void generateAnimal(int player, int index);
+    sf::Sprite* handleSprite(int player);
+    int getRandomAnimal();
+    void setScale();
+    vector<sf::Sprite> bubbleSprites;
+    sf::Texture bubbleTexture;
 
 public:
     Queue(int player);

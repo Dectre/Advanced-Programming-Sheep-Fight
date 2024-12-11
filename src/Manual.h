@@ -94,11 +94,16 @@ const int goatHeight= 86;
 const int sheepWidth = 90;
 const int sheepHeight = 70;
 
-const int queueXpos=500;
-const int queueYPos=100;
+const int queueXpos=400;
+const int whitePlayerqueueYPos=20;
+const int blackPlayerqueueYPos=640;
 const int spaceBetweenQueueBubbles=100;
+const int queueHeight=70;
+const int queueWidth=80;
+const int bubbleRadiusOffset=15;
 
 const int playerOneStartPoint = 110;
 const int playerTwoStartPoint = windowWidth - 150;
+
 
 #endif //SHEEPFIGHT_MANUAL_H
