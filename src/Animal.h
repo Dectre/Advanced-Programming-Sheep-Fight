@@ -29,6 +29,7 @@ public:
 protected:
     sf::Clock animationClock;
     int numOfAnimations;
+    int numOfStandingAnimations;
     int currentAnimationCoefficient;
     int animationTime;
     sf::Sprite sprite;

@@ -27,7 +27,7 @@ void Animal::initSprite() {
 
 void Animal::changeTexture() {
     this->defaultTexture = standTexture;
-    this->numOfAnimations = 4;
+    this->numOfAnimations = numOfStandingAnimations;
     this->sprite.setTexture(this->standTexture);
     this->sprite.setTextureRect(handleAnimation());
 }
@@ -66,6 +66,7 @@ void WhitePig::initVariables() {
     this->damage = pigDamage;
     this->displayProbability = pigDisplayProbability;
     this->numOfAnimations = numOfWhitePigMovingAnimations;
+    this->numOfStandingAnimations = numOfWhitePigStandingAnimations;
     this->animationTime = whitePigAnimationTime;
 
 }
@@ -95,6 +96,7 @@ void WhiteGoat::initVariables() {
     this->damage = goatDamage;
     this->displayProbability = goatDisplayProbability;
     this-> numOfAnimations = numOfWhiteGoatMovingAnimations;
+    this->numOfStandingAnimations = numOfWhiteGoatStandingAnimations;
     this->animationTime = whiteGoatAnimationTime;
 }
 
@@ -123,6 +125,7 @@ void WhiteSheep::initVariables() {
     this->damage = sheepDamage;
     this->displayProbability = sheepDisplayProbability;
     this-> numOfAnimations = numOfWhiteSheepMovingAnimations;
+    this->numOfStandingAnimations = numOfWhiteSheepStandingAnimations;
     this->animationTime = whiteSheepAnimationTime;
 }
 
@@ -151,6 +154,7 @@ void BlackPig::initVariables() {
     this->damage = pigDamage;
     this->displayProbability = pigDisplayProbability;
     this->numOfAnimations = numOfBlackPigMovingAnimations;
+    this->numOfStandingAnimations = numOfBlackPigStandingAnimations;
     this->animationTime = blackPigAnimationTime;
 }
 
@@ -180,6 +184,7 @@ void BlackGoat::initVariables() {
     this->damage = goatDamage;
     this->displayProbability = goatDisplayProbability;
     this-> numOfAnimations = numOfBlackGoatMovingAnimations;
+    this->numOfStandingAnimations = numOfBlackGoatStandingAnimations;
     this->animationTime = blackGoatAnimationTime;
 }
 
@@ -197,7 +202,6 @@ BlackSheep::BlackSheep() : Animal() {
     this->initTexture();
     this->initSprite();
     this->setScale(sheepWidth, sheepHeight, 1);
-
 }
 
 void BlackSheep::initVariables() {
@@ -208,6 +212,7 @@ void BlackSheep::initVariables() {
     this->damage = sheepDamage;
     this->displayProbability = sheepDisplayProbability;
     this-> numOfAnimations = numOfBlackSheepMovingAnimations;
+    this->numOfStandingAnimations = numOfBlackSheepStandingAnimations;
     this->animationTime = blackSheepAnimationTime;
     this->sprite.setPosition(1080,0);
 }

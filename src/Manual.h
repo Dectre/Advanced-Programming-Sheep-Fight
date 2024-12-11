@@ -48,16 +48,27 @@ Path BLACK_SHEEP_QUEUE = "sprites/black-sheep/queue.png";
 const int numOfWhitePigMovingAnimations = 4;
 const int numOfWhitePigStandingAnimations = 4;
 const int whitePigAnimationTime = 100;
+
 const int numOfBlackPigMovingAnimations = 3;
+const int numOfBlackPigStandingAnimations = 6;
 const int blackPigAnimationTime = 133;
+
 const int numOfWhiteGoatMovingAnimations = 8;
+const int numOfWhiteGoatStandingAnimations = 8;
 const int whiteGoatAnimationTime = 66;
+
 const int numOfBlackGoatMovingAnimations = 8;
+const int numOfBlackGoatStandingAnimations = 8;
 const int blackGoatAnimationTime = 66;
+
 const int numOfWhiteSheepMovingAnimations = 3;
+const int numOfWhiteSheepStandingAnimations = 4;
 const int whiteSheepAnimationTime = 100;
+
 const int numOfBlackSheepMovingAnimations = 3;
+const int numOfBlackSheepStandingAnimations = 4;
 const int blackSheepAnimationTime = 100;
+
 const int pigDamage = 5;
 const int goatDamage = 3;
 const int sheepDamage = 8;

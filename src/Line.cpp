@@ -60,10 +60,7 @@ bool Line::checkAnimalCollision(Animal* animal) {
 }
 
 void Line::handleSpeed() {
-    int sumOfTeam1Speeds = 0;
-    int sumOfTeam1Power = 0;
-    int sumOfTeam2Power = 0;
-    int sumOfTeam2Speeds = 0;
+    int sumOfTeam1Speeds = 0; int sumOfTeam1Power = 0; int sumOfTeam2Power = 0; int sumOfTeam2Speeds = 0;
     for (Animal* animal : team1Animals)
         if (animal->getFightStatus()) {
             sumOfTeam1Speeds += animal->getDefaultSpeed() * RIGHT;
@@ -93,12 +90,14 @@ void Line::updateAnimalsCollision(){
     for (Animal* animal : this->team1Animals) {
         if(checkAnimalCollision(animal) and !animal->getFightStatus()) {
             animal->animalIsFighting();
+            animal->changeTexture();
             this->handleSpeed();
         }
     }
     for (Animal* animal : this->team2Animals) {
         if (checkAnimalCollision(animal) and !animal->getFightStatus()) {
             animal->animalIsFighting();
+            animal->changeTexture();
             this->handleSpeed();
         }
     }
